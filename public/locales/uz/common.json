@@ -1,0 +1,196 @@
+{
+  "navbar": {
+    "home": "Bosh sahifa",
+    "courses": "Kurslar",
+    "mentor": "Ustozlar",
+    "group": "Hamjamiyat",
+    "testimonials": "Fikrlar",
+    "pricing": "Narxlar",
+    "getStarted": "Boshlash"
+  },
+  "hero": {
+  "badge": "Yangi kurslar mavjud",
+
+  "titleLine1": "Yangi ko‘nikmalarni egallang",
+  "titleLine2": "Istalgan vaqtda",
+  "titleLine3": "Onlayn o‘rganing",
+
+  "description": "50 000 dan ortiq talabalar bilan birga dunyoning eng yaxshi mentorlaridan o‘rganing. Professional kurslar bilan karyerangizni o‘zgartiring.",
+
+  "stats": {
+    "students": "50K+ O‘quvchi",
+    "courses": "200+ Kurs",
+    "rating": "4.9 Reyting"
+  },
+
+  "badgeCourses": "200+ Kurs",
+  "badgeText": "Hozir mavjud"
+},
+  "buttons": {
+    "start": "Boshlash",
+    "youtubeChanel": "YouTube kanali"
+  },
+  "community": {
+    "badge": "HAMJAMIYAT",
+    "title": "Bizning faol",
+    "titleHighlight": "Ta'lim hamjamiyatimizga qo‘shiling",
+    "description": "Birga o‘rganish samaraliroq. 50 000+ talabadan iborat hamjamiyatimizga qo‘shiling va rivojlanishingizni tezlashtiradigan hamkorlik imkoniyatlarini oching.",
+
+    "features": {
+      "studyGroupsTitle": "O‘quv guruhlari",
+      "studyGroupsText": "Bir xil maqsadli o‘quvchilar bilan bog‘lanib, birgalikda o‘rganish uchun guruhlar tuzing.",
+
+      "discussionForumsTitle": "Muhokama forumlari",
+      "discussionForumsText": "Mazmunli muhokamalarda qatnashing va hamkorlar hamda mentorlaridan javob oling.",
+
+      "liveSessionsTitle": "Jonli darslar",
+      "liveSessionsText": "Mutaxassislar bilan jonli savol-javob sessiyalari va workshoplarda qatnashing.",
+
+      "peerSupportTitle": "Hamkor yordami",
+      "peerSupportText": "Kerak bo‘lgan paytda boshqa o‘quvchilardan yordam va qo‘llab-quvvatlash oling.",
+
+      "globalCommunityTitle": "Global hamjamiyat",
+      "globalCommunityText": "150 dan ortiq davlatlardagi talabalar bilan bog‘laning.",
+
+      "projectCollaborationTitle": "Loyiha hamkorligi",
+      "projectCollaborationText": "Hamkorlaringiz bilan real loyihalarda ishlang."
+    },
+
+    "button": "Hamjamiyatga qo‘shilish",
+
+    "badges": {
+      "supportTitle": "24/7 yordam",
+      "supportText": "Doimo yordam beramiz",
+      "countriesTitle": "150+ davlat",
+      "countriesText": "Butun dunyo bo‘ylab"
+    }
+  },
+  "courses": {
+    "badge": "KURSLAR",
+    "title": "Bizning mashhur",
+    "titleHighlight": "kurslarimiz",
+    "description": "Maqsadlaringizga erishishga yordam beradigan mutaxassislar tomonidan yaratilgan yuzlab kurslardan tanlang.",
+    "enroll": "Ro‘yxatdan o‘tish →",
+    "viewAll": "Barcha kurslarni ko‘rish →",
+
+    "items": [
+      {
+        "category": "Dasturlash",
+        "title": "Web dasturlash Bootcamp",
+        "duration": "12 hafta"
+      },
+      {
+        "category": "Dizayn",
+        "title": "UI/UX Dizayn Masterclass",
+        "duration": "8 hafta"
+      },
+      {
+        "category": "Data Science",
+        "title": "Ma'lumotlar tahlili va Data Science",
+        "duration": "16 hafta"
+      },
+      {
+        "category": "Marketing",
+        "title": "Professional Digital Marketing",
+        "duration": "6 hafta"
+      }
+    ]
+  },
+  "mentors": {
+    "badge": "MENTORLAR",
+    "title": "Sohadagi",
+    "titleHighlight": "mutaxassislardan o‘rganing",
+    "description": "Bizning mentorlar o‘z sohalarida ko‘p yillik tajribaga ega yetakchi mutaxassislardir.",
+
+    "students": "O‘quvchilar",
+    "courses": "Kurslar",
+
+    "items": [
+      {
+        "role": "Web dasturlash mutaxassisi",
+        "bio": "Ma'lumotlar tahlili va mashinaviy o‘rganishda 8+ yillik tajriba. Facebook kompaniyasida Data Scientist bo‘lib ishlagan."
+      },
+      {
+        "role": "Digital marketing mutaxassisi",
+        "bio": "Digital marketing va SEO strategiyalarida 10+ yillik tajriba. Google kompaniyasida marketing menejeri bo‘lib ishlagan."
+      },
+      {
+        "role": "Data Science mutaxassisi",
+        "bio": "Ma'lumotlar tahlili va mashinaviy o‘rganishda 7+ yillik tajriba. Facebook kompaniyasida Data Scientist bo‘lib ishlagan."
+      },
+      {
+        "role": "Grafik dizayn mutaxassisi",
+        "bio": "Grafik dizayn va vizual san'atda 9+ yillik tajriba. Adobe kompaniyasida Creative Director bo‘lib ishlagan."
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "FIKRLAR",
+    "title": "Talabalarimiz nima deydi",
+    "description": "LearnHub yordamida o‘z karyerasini o‘zgartirgan minglab muvaffaqiyatli talabalar safiga qo‘shiling.",
+    "items": [
+      {
+        "name": "Alex Thompson",
+        "role": "Meta kompaniyasida dasturchi",
+        "avatar": "/assets/avatars/testimonial-1.jpg",
+        "text": "LearnHub mening karyeramni butunlay o‘zgartirdi. Web dasturlash bootcampi menga Meta kompaniyasida ishlash uchun kerakli ko‘nikmalarni berdi."
+      },
+      {
+        "name": "Jessica Lee",
+        "role": "Spotify kompaniyasida UX dizayner",
+        "avatar": "/assets/avatars/testimonial-2.jpg",
+        "text": "UI/UX kursi aynan menga kerak bo‘lgan narsa edi. Amaliy loyihalar va mentor fikrlari portfolio yaratishda katta yordam berdi."
+      },
+      {
+        "name": "David Park",
+        "role": "Amazon kompaniyasida Data Analyst",
+        "avatar": "/assets/avatars/testimonial-3.jpg",
+        "text": "LearnHub tufayli marketingdan data science sohasiga o‘tdim. Strukturali darslar va hamjamiyat juda katta yordam berdi."
+      },
+      {
+        "name": "Maria Garcia",
+        "role": "Freelance dizayner",
+        "avatar": "/assets/avatars/testimonial-4.jpg",
+        "text": "Freelancer sifatida moslashuvchan o‘qish menga juda muhim edi. LearnHub kurslari mening jadvalimga juda mos tushdi."
+      },
+      {
+        "name": "James Wilson",
+        "role": "Startup asoschisi",
+        "avatar": "/assets/avatars/testimonial-5.jpg",
+        "text": "Marketing kursi startupimni rivojlantirishni tushunishga yordam berdi. Bu mening ta’limimdagi eng yaxshi investitsiya bo‘ldi."
+      },
+      {
+        "name": "Emily Chen",
+        "role": "Google kompaniyasida Product Manager",
+        "avatar": "/assets/avatars/testimonial-6.jpg",
+        "text": "Texnik va biznes kurslar kombinatsiyasi menga katta ustunlik berdi. LearnHubni barcha hamkasblarimga tavsiya qilganman."
+      }
+    ]
+  },
+  "footer": {
+    "description": "Dunyo bo‘ylab millionlab o‘quvchilarga professional kurslar va mentorlar orqali bilim beramiz.",
+    "location": "San-Fransisko, AQSh",
+
+    "product": "Mahsulot",
+    "company": "Kompaniya",
+    "support": "Yordam",
+    "helpCenter": "Yordam markazi",
+
+    "productLinks": ["Imkoniyatlar", "Narxlar", "Kurslar", "Hamjamiyat"],
+    "companyLinks": ["Biz haqimizda", "Karyera", "Blog", "Yangiliklar"],
+    "supportLinks": [
+      "Yordam markazi",
+      "Biz bilan bog‘lanish",
+      "Maxfiylik siyosati",
+      "Foydalanish shartlari"
+    ],
+    "helpCenterLinks": [
+      "Web dasturlash",
+      "UI/UX dizayn",
+      "Data Science",
+      "Marketing"
+    ],
+
+    "copyright": "© 2026 LearnHub. Barcha huquqlar himoyalangan."
+  }
+}

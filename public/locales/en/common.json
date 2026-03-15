@@ -1,0 +1,195 @@
+{
+  "navbar": {
+    "home": "Home",
+    "courses": "Courses",
+    "mentor": "Mentors",
+    "group": "Community",
+    "testimonials": "Testimonials",
+    "pricing": "Pricing"
+  },
+  "hero": {
+  "badge": "New Courses Available",
+
+  "titleLine1": "Master New Skills",
+  "titleLine2": "Online Anytime,",
+  "titleLine3": "Anywhere",
+
+  "description": "Join over 50,000+ students learning from world-class mentors. Transform your career with industry-leading courses.",
+
+  "stats": {
+    "students": "50K+ Students",
+    "courses": "200+ Courses",
+    "rating": "4.9 Rating"
+  },
+
+  "badgeCourses": "200+ Courses",
+  "badgeText": "Available Now"
+},
+  "buttons": {
+    "start": "Start Learning",
+    "getStarted": "Get Started",
+    "youtubeChanel": "YouTube chanel"
+  },
+  "community": {
+    "badge": "COMMUNITY",
+    "title": "Join Our Thriving",
+    "titleHighlight": "Learning Community",
+    "description": "Learning is better together. Join our community of 50,000+ students and unlock collaborative features that accelerate your growth.",
+
+    "features": {
+      "studyGroupsTitle": "Study Groups",
+      "studyGroupsText": "Connect with like-minded learners and form study groups for collaborative learning.",
+
+      "discussionForumsTitle": "Discussion Forums",
+      "discussionForumsText": "Engage in meaningful discussions and get answers from peers and mentors.",
+
+      "liveSessionsTitle": "Live Sessions",
+      "liveSessionsText": "Join live Q&A sessions and workshops with industry experts.",
+
+      "peerSupportTitle": "Peer Support",
+      "peerSupportText": "Get help and support from fellow learners anytime you need it.",
+
+      "globalCommunityTitle": "Global Community",
+      "globalCommunityText": "Connect with students from 150+ countries worldwide.",
+
+      "projectCollaborationTitle": "Project Collaboration",
+      "projectCollaborationText": "Work on real-world projects with your peers."
+    },
+
+    "button": "Join Community",
+
+    "badges": {
+      "supportTitle": "24/7 Support",
+      "supportText": "Always here",
+      "countriesTitle": "150+ Countries",
+      "countriesText": "Worldwide reach"
+    }
+  },
+  "courses": {
+    "badge": "COURSE",
+    "title": "Explore Our Popular",
+    "titleHighlight": "Courses",
+    "description": "Choose from hundreds of courses designed by industry experts to help you achieve your goals.",
+    "enroll": "Enroll now →",
+    "viewAll": "View All Courses →",
+
+    "items": [
+      {
+        "category": "Development",
+        "title": "Web Development Bootcamp",
+        "duration": "12 weeks"
+      },
+      {
+        "category": "Design",
+        "title": "UI/UX Design Masterclass",
+        "duration": "8 weeks"
+      },
+      {
+        "category": "Data Science",
+        "title": "Data Science & Analytics",
+        "duration": "16 weeks"
+      },
+      {
+        "category": "Marketing",
+        "title": "Digital Marketing Pro",
+        "duration": "6 weeks"
+      }
+    ]
+  },
+  "mentors": {
+    "badge": "MENTORS",
+    "title": "Learn From Industry",
+    "titleHighlight": "Experts",
+    "description": "Our mentors are industry leaders with years of experience in their respective fields.",
+
+    "students": "Students",
+    "courses": "Courses",
+
+    "items": [
+      {
+        "role": "Web Development Expert",
+        "bio": "8+ years experience in data analysis and machine learning. Former Data Scientist at Facebook."
+      },
+      {
+        "role": "Digital Marketing Guru",
+        "bio": "10+ years experience in digital marketing and SEO strategies. Former Marketing Manager at Google."
+      },
+      {
+        "role": "Data Science Specialist",
+        "bio": "7+ years experience in data analysis and machine learning. Former Data Scientist at Facebook."
+      },
+      {
+        "role": "Graphic Design Artist",
+        "bio": "9+ years experience in graphic design and visual arts. Former Creative Director at Adobe."
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "TESTIMONIALS",
+    "title": "What Our Students Say",
+    "description": "Join thousands of successful students who have transformed their careers with LearnHub.",
+    "items": [
+      {
+        "name": "Alex Thompson",
+        "role": "Software Developer at Meta",
+        "avatar": "/assets/avatars/testimonial-1.jpg",
+        "text": "LearnHub completely transformed my career. The web development bootcamp gave me the skills I needed to land my dream job at Meta. The mentors are incredible!"
+      },
+      {
+        "name": "Jessica Lee",
+        "role": "UX Designer at Spotify",
+        "avatar": "/assets/avatars/testimonial-2.jpg",
+        "text": "The UI/UX design course was exactly what I needed. The practical projects and mentor feedback helped me build a portfolio that got me hired at Spotify."
+      },
+      {
+        "name": "David Park",
+        "role": "Data Analyst at Amazon",
+        "avatar": "/assets/avatars/testimonial-3.jpg",
+        "text": "I switched careers from marketing to data science thanks to LearnHub. The structured curriculum and supportive community made the transition seamless."
+      },
+      {
+        "name": "Maria Garcia",
+        "role": "Freelance Designer",
+        "avatar": "/assets/avatars/testimonial-4.jpg",
+        "text": "As a freelancer, I needed flexible learning. LearnHub's self-paced courses fit perfectly into my schedule. Highly recommend!"
+      },
+      {
+        "name": "James Wilson",
+        "role": "Startup Founder",
+        "avatar": "/assets/avatars/testimonial-5.jpg",
+        "text": "The marketing course helped me understand how to grow my startup. The ROI has been incredible — best investment in my education."
+      },
+      {
+        "name": "Emily Chen",
+        "role": "Product Manager at Google",
+        "avatar": "/assets/avatars/testimonial-6.jpg",
+        "text": "The combination of technical and business courses gave me a unique edge. I've recommended LearnHub to all my colleagues."
+      }
+    ]
+  },
+  "footer": {
+    "description": "Empowering millions of learners worldwide with industry-leading courses and expert mentors.",
+    "location": "San Francisco, CA",
+    "product": "Product",
+    "company": "Company",
+    "support": "Support",
+    "helpCenter": "Help Center",
+
+    "productLinks": ["Features", "Pricing", "Courses", "Community"],
+    "companyLinks": ["About Us", "Careers", "Blog", "Press"],
+    "supportLinks": [
+      "Help Center",
+      "Contact Us",
+      "Privacy Policy",
+      "Terms of Service"
+    ],
+    "helpCenterLinks": [
+      "Web Development",
+      "UI/UX Design",
+      "Data Science",
+      "Marketing"
+    ],
+
+    "copyright": "© 2026 LearnHub. All rights reserved."
+  }
+}

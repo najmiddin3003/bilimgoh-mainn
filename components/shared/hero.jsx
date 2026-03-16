@@ -12,11 +12,13 @@ import Footer from "../shared/footer";
 import Navbar from "./navbar";
 import CursorFollower from './cursor-follower';
 import AnimatedSection from "./cards/framer-card";
-
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hero() {
   const { t } = useTranslation();
+
+  const [index, setIndex] = useState(0);
 
   const container = {
     hidden: {},
@@ -42,6 +44,17 @@ export default function Hero() {
     },
   };
 
+  const floating = {
+    animate: {
+      y: [0, -15, 0],
+      transition: {
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   const zoomIn = {
     hidden: {
       opacity: 0,
@@ -57,13 +70,32 @@ export default function Hero() {
     },
   };
 
+  const images = [
+    "/assets/images/hero1.jpg",
+    "/assets/images/hero2.jpg",
+    "/assets/images/hero3.jpg",
+    "/assets/images/hero4.jpg",
+    "/assets/images/hero5.jpg",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Navbar />
 
       <motion.section
+        id="#"
         variants={container}
-        initial="hidden"
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
         animate="show"
         className="w-full mt-10 md:mt-18 py-16 transition-colors duration-500"
       >
@@ -117,37 +149,43 @@ export default function Hero() {
           </motion.div>
 
           {/* RIGHT */}
-          <motion.div variants={zoomIn} className="relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl shadow-black/40 border border-gray-200 dark:border-[#1F2937]">
-              <Image
-                src="/assets/images/hero.jpg"
-                width={600}
-                height={400}
-                alt="learning"
-                className="w-full object-cover"
-              />
-            </div>
-
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center shadow-xl shadow-green-500/30 cursor-pointer hover:scale-110 transition">
-                <Play color="white" size={28} />
-              </div>
-            </div>
-
-            {/* Floating Badge */}
+          <motion.div
+            variants={floating}
+            animate="animate"
+            className="relative"
+          >
+            {/* rotating glow */}
             <motion.div
-              variants={fadeUp}
-              className="absolute -bottom-6 left-6 bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-[#1F2937] shadow-lg rounded-xl px-4 py-3 text-sm backdrop-blur"
-            >
-              📚
-              <span className="font-semibold text-gray-900 dark:text-[#E5E7EB]">
-                {t("hero.badgeCourses")}
-              </span>
-              <p className="text-gray-500 dark:text-[#9CA3AF] text-xs">
-                {t("hero.badgeText")}
-              </p>
-            </motion.div>
+              animate={{ rotate: 360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400 opacity-20 blur-3xl"
+            />
+
+            {/* soft glow */}
+            <div className="absolute -inset-8 -z-20">
+              <div className="w-full h-full rounded-3xl bg-gradient-to-r from-green-400/30 via-emerald-400/20 to-teal-400/30 blur-3xl opacity-70 dark:opacity-40"></div>
+            </div>
+
+            {/* image */}
+            <div className="relative z-20 rounded-3xl overflow-hidden shadow-2xl shadow-black/40 border border-gray-400 dark:border-[#1F2937] p-3">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={images[index]}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <Image
+                    src={images[index]}
+                    width={600}
+                    height={400}
+                    alt="learning"
+                    className="w-full object-cover rounded-3xl"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </motion.section>

@@ -49,7 +49,7 @@ export default function Testimonials() {
   };
 
   return (
-    <motion.section
+    <motion.section id="testimonial"
       variants={container}
       initial="hidden"
       whileInView="show"
@@ -81,11 +81,8 @@ export default function Testimonials() {
             <motion.div
               key={i}
               variants={cardAnimation}
-              whileHover={{
-                y: -10,
-                scale: 1.03,
-              }}
-              className="bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition p-6"
+              
+              className="bg-white hover:scale-[1.02] duration-300 dark:bg-[#0F172A] border border-gray-200 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition p-6"
             >
               {/* Stars */}
               <motion.div

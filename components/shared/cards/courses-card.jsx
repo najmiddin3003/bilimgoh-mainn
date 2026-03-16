@@ -106,6 +106,7 @@ export default function Courses() {
 
   return (
     <motion.section
+      id="courses"
       variants={container}
       initial="hidden"
       whileInView="show"
@@ -143,8 +144,8 @@ export default function Courses() {
             <motion.div
               key={course.id}
               variants={cardAnimation}
-              whileHover={{ scale: 1.03, y: -8 }}
-              className="bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition overflow-hidden"
+              // whileHover={{ scale: 1.3, y: -20 }}
+              className="bg-white dark:bg-[#0F172A] hover:scale-[1.02] border border-gray-200 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition overflow-hidden"
             >
               {/* Image */}
               <div className="relative">

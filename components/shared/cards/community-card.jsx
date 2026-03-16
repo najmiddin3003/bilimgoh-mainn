@@ -94,7 +94,7 @@ export default function Community() {
   };
 
   return (
-    <motion.section
+    <motion.section id="community"
       variants={container}
       initial="hidden"
       whileInView="show"
@@ -176,7 +176,7 @@ export default function Community() {
                 className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-4 border-green-400"
               >
                 <motion.div
-                  whileHover={{ scale: 1.15 }}
+                  whileHover={{ scale: 1.45 }}
                   transition={{ duration: 0.4 }}
                   className="w-full h-full"
                 >

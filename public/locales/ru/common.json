@@ -28,7 +28,8 @@
 },
   "buttons": {
     "start": "Начать обучение",
-    "youtubeChanel": "YouTube канал"
+    "youtubeChanel": "YouTube канал",
+    "getStarted": "Начать"
   },
   "community": {
     "badge": "СООБЩЕСТВО",
@@ -70,7 +71,7 @@
     "title": "Изучите наши популярные",
     "titleHighlight": "курсы",
     "description": "Выберите из сотен курсов, созданных экспертами отрасли, чтобы достичь своих целей.",
-    "enroll": "Записаться →",
+    "enroll": "Ознакомиться →",
     "viewAll": "Посмотреть все курсы →",
 
     "items": [

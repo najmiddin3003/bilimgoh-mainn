@@ -93,7 +93,7 @@ export default function Mentors() {
   };
 
   return (
-    <motion.section
+    <motion.section id="mentors"
       variants={container}
       initial="hidden"
       whileInView="show"
@@ -129,11 +129,8 @@ export default function Mentors() {
             <motion.div
               key={mentor.id}
               variants={cardAnimation}
-              whileHover={{
-                y: -10,
-                scale: 1.03,
-              }}
-              className="group bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition duration-300 p-6 text-center"
+             
+              className="group hover:scale-[1.02] bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition duration-300 p-6 text-center"
             >
               {/* Avatar */}
               <motion.div
@@ -144,7 +141,7 @@ export default function Mentors() {
                   src={mentor.image}
                   fill
                   alt={mentor.name}
-                  className="rounded-full object-cover border-4 border-green-400"
+                  className="rounded-full group-hover:scale-[1.1] transition duration-300 group-hover:rotate-[10deg] object-cover border-4 border-green-400"
                 />
 
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1 shadow-md">

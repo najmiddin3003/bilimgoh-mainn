@@ -1,35 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, BookOpen } from "lucide-react";
+import { Menu, X, BookOpenText } from "lucide-react";
 import Link from "next/link";
 import ModeToggle from "./mode-toggle";
 import LanguageSwitcher from "./language-dropdown";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const { isSignedIn } = useUser();
   const { t } = useTranslation();
 
   const menu = [
     { name: t("navbar.home"), link: "#" },
-    { name: t("navbar.courses"), link: "#" },
-    { name: t("navbar.mentor"), link: "#" },
-    { name: t("navbar.group"), link: "#" },
-    { name: t("navbar.testimonials"), link: "#" },
-    { name: t("navbar.pricing"), link: "#" },
+    { name: t("navbar.courses"), link: "#courses" },
+    { name: t("navbar.mentor"), link: "#mentors" },
+    { name: t("navbar.group"), link: "#community" },
+    { name: t("navbar.testimonials"), link: "#testimonial" },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -37,29 +34,27 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`w-full fixed top-0 z-50 transition-all duration-300 border-b
+      transition={{ duration: 0.4 }}
+      className={`fixed w-full top-0 z-50 border-b transition-all duration-300
       ${
         scrolled
-          ? "py-2 bg-white/80 backdrop-blur-md shadow-lg dark:bg-[#0b1117]/80 border-gray-200 dark:border-gray-800"
-          : "py-4 bg-white dark:bg-[#0b1117] border-gray-200 dark:border-gray-800"
+          ? "bg-white/80 backdrop-blur-md shadow dark:bg-[#0b1117]/80"
+          : "bg-white dark:bg-[#0b1117]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         {/* LOGO */}
-        <motion.div
-          animate={{ scale: scrolled ? 0.9 : 1 }}
-          transition={{ duration: 0.3 }}
-          className="flex items-center gap-2 font-semibold text-xl text-gray-900 dark:text-white"
-        >
-          <BookOpen className="text-green-500" />
-          LearnHub
-        </motion.div>
+        <Link href="/">
+          <div className="flex items-center gap-2 font-semibold text-lg text-gray-900 dark:text-white">
+            <BookOpenText className="text-green-500" />
+            Bilimgoh
+          </div>
+        </Link>
 
         {/* DESKTOP MENU */}
         <ul className="hidden lg:flex gap-8 text-gray-700 dark:text-gray-200 font-medium">
-          {menu.map((item, index) => (
-            <li key={index}>
+          {menu.map((item, i) => (
+            <li key={i}>
               <Link
                 href={item.link}
                 className="hover:text-green-500 transition"
@@ -70,37 +65,36 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* RIGHT SIDE */}
-        <div className="hidden lg:flex items-center gap-2">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-medium transition"
-          >
-            Get Started
-          </motion.button>
-
+        {/* DESKTOP RIGHT */}
+        <div className="hidden lg:flex items-center gap-4">
           <LanguageSwitcher />
-
           <div className="border rounded-md">
-            <ModeToggle />
+          <ModeToggle />
           </div>
+
+          {!isSignedIn ? (
+            <SignInButton mode="modal">
+              <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-md">
+                {t("buttons.getStarted")}
+              </button>
+            </SignInButton>
+          ) : (
+            <UserButton afterSignOutUrl="/" />
+          )}
         </div>
 
-        {/* MOBILE ICON */}
-        <div className="lg:hidden flex items-center gap-1 md:gap-3">
-          <ModeToggle />
+        {/* MOBILE RIGHT */}
+        <div className="lg:hidden flex items-center gap-2">
           <LanguageSwitcher />
+          <div className="border rounded-md">
+          <ModeToggle />
+          </div>
 
           <button
             onClick={() => setOpen(!open)}
-            className="text-gray-900 dark:text-white"
+            className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
           >
-            {open ? (
-              <X className="size-5 md:size-7" />
-            ) : (
-              <Menu className="size-5 md:size-7" />
-            )}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -110,28 +104,34 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="lg:hidden px-6 pb-6 bg-white dark:bg-black"
+          className="lg:hidden border-t bg-white dark:bg-[#0b1117]"
         >
-          <ul className="flex flex-col gap-4 text-gray-700 dark:text-gray-200 font-medium">
-            {menu.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.link}
-                  onClick={() => setOpen(false)}
-                  className="block hover:text-green-500 transition"
-                >
-                  {item.name}
-                </Link>
-              </li>
+          <div className="px-6 py-6 flex flex-col gap-6">
+            {/* MENU LINKS */}
+            {menu.map((item, i) => (
+              <Link
+                key={i}
+                href={item.link}
+                onClick={() => setOpen(false)}
+                className="text-gray-700 dark:text-gray-200 font-medium hover:text-green-500 transition"
+              >
+                {item.name}
+              </Link>
             ))}
-          </ul>
 
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full transition"
-          >
-            Get Started
-          </motion.button>
+            {/* AUTH BUTTON */}
+            {!isSignedIn ? (
+              <SignInButton mode="modal">
+                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full font-medium transition">
+                  {t("buttons.getStarted")}
+                </button>
+              </SignInButton>
+            ) : (
+              <div className="flex justify-center">
+                <UserButton afterSignOutUrl="/" />
+              </div>
+            )}
+          </div>
         </motion.div>
       )}
     </motion.nav>

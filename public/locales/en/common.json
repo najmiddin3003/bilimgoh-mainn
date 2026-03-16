@@ -8,23 +8,23 @@
     "pricing": "Pricing"
   },
   "hero": {
-  "badge": "New Courses Available",
+    "badge": "New Courses Available",
 
-  "titleLine1": "Master New Skills",
-  "titleLine2": "Online Anytime,",
-  "titleLine3": "Anywhere",
+    "titleLine1": "Master New Skills",
+    "titleLine2": "Online Anytime,",
+    "titleLine3": "Anywhere",
 
-  "description": "Join over 50,000+ students learning from world-class mentors. Transform your career with industry-leading courses.",
+    "description": "Join over 50,000+ students learning from world-class mentors. Transform your career with industry-leading courses.",
 
-  "stats": {
-    "students": "50K+ Students",
-    "courses": "200+ Courses",
-    "rating": "4.9 Rating"
+    "stats": {
+      "students": "50K+ Students",
+      "courses": "200+ Courses",
+      "rating": "4.9 Rating"
+    },
+
+    "badgeCourses": "200+ Courses",
+    "badgeText": "Available Now"
   },
-
-  "badgeCourses": "200+ Courses",
-  "badgeText": "Available Now"
-},
   "buttons": {
     "start": "Start Learning",
     "getStarted": "Get Started",
@@ -66,11 +66,11 @@
     }
   },
   "courses": {
-    "badge": "COURSE",
+    "badge": "COURSES",
     "title": "Explore Our Popular",
     "titleHighlight": "Courses",
     "description": "Choose from hundreds of courses designed by industry experts to help you achieve your goals.",
-    "enroll": "Enroll now →",
+    "enroll": "Explore →",
     "viewAll": "View All Courses →",
 
     "items": [

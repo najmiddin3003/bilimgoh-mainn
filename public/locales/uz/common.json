@@ -28,7 +28,8 @@
 },
   "buttons": {
     "start": "Boshlash",
-    "youtubeChanel": "YouTube kanali"
+    "youtubeChanel": "YouTube kanali",
+    "getStarted": "Boshlash"
   },
   "community": {
     "badge": "HAMJAMIYAT",
@@ -70,7 +71,7 @@
     "title": "Bizning mashhur",
     "titleHighlight": "kurslarimiz",
     "description": "Maqsadlaringizga erishishga yordam beradigan mutaxassislar tomonidan yaratilgan yuzlab kurslardan tanlang.",
-    "enroll": "Ro‘yxatdan o‘tish →",
+    "enroll": "Tanishish →",
     "viewAll": "Barcha kurslarni ko‘rish →",
 
     "items": [

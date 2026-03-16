@@ -8,6 +8,7 @@ import {
   Twitter,
   Github,
   Linkedin,
+  BookOpenText,
 } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -59,8 +60,8 @@ export default function Footer() {
         {/* Left Info */}
         <motion.div variants={fadeUp} className="lg:col-span-1">
           <div className="flex items-center gap-2 font-semibold text-xl text-gray-900 dark:text-[#E5E7EB]">
-            <BookOpen className="text-green-500" />
-            LearnHub
+            <BookOpenText className="text-green-500" />
+            Bilimgoh
           </div>
 
           <p className="text-gray-600 dark:text-[#9CA3AF] mt-4 text-sm">
@@ -70,7 +71,7 @@ export default function Footer() {
           <div className="mt-6 space-y-3 text-sm text-gray-600 dark:text-[#9CA3AF]">
             <div className="flex items-center gap-2">
               <Mail size={16} />
-              hello@learnhub.com
+              salom@bilimgoh.com
             </div>
 
             <div className="flex items-center gap-2">

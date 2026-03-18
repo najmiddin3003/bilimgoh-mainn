@@ -5,16 +5,13 @@ import { useEffect, useRef } from "react";
 export default function PremiumCursor() {
   const glow = useRef(null);
   // const dot = useRef(null);
-
   useEffect(() => {
     const move = (e) => {
+      if (!glow.current) return; // 🔥 MUHIM
+
       const x = e.clientX;
       const y = e.clientY;
 
-      // small dot (cursor center)
-      // dot.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-
-      // glow follower
       glow.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
     };
 

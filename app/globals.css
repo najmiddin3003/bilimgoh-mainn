@@ -1,6 +1,5 @@
 @import "flag-icons/css/flag-icons.min.css";
 
-
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -90,7 +89,7 @@
 }
 
 .dark {
-  --background: #0B0F14;
+  --background: #0b0f14;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -161,7 +160,6 @@
   animation: gradientMove 15s ease infinite;
 }
 
-
 @keyframes ripple {
   0% {
     transform: translate(-50%, -50%) scale(0.3);
@@ -178,10 +176,28 @@
 }
 
 .mesh {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at var(--x) var(--y),
-      rgba(34,197,94,0.25),
+      rgba(34, 197, 94, 0.25),
       transparent 40%
     ),
     #0b0f14;
+}
+.courses-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("../public/assets/images/back-to-school-doodle-style-background-education-hand-drawn-objects-and-symbols-banner-vector.jpg");
+  z-index: 1;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.courses-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.9); /* opacity shu yerda */
+  z-index: -1;
 }

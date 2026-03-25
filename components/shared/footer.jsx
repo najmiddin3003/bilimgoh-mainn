@@ -54,21 +54,21 @@ export default function Footer() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
-      className="bg-white dark:bg-[#0B0F14] border-t border-gray-200 dark:border-[#1F2937]"
+      className="bg-[#1c1917] dark:bg-[#0B0F14] border-t border-gray-200 dark:border-[#1F2937]"
     >
       <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-5 gap-12">
         {/* Left Info */}
         <motion.div variants={fadeUp} className="lg:col-span-1">
-          <div className="flex items-center gap-2 font-semibold text-xl text-gray-900 dark:text-[#E5E7EB]">
+          <div className="flex items-center gap-2 font-semibold text-xl text-white dark:text-[#E5E7EB]">
             <BookOpenText className="text-green-500" />
             Bilimgoh
           </div>
 
-          <p className="text-gray-600 dark:text-[#9CA3AF] mt-4 text-sm">
+          <p className="text-gray-300 dark:text-[#9CA3AF] mt-4 text-sm">
             {t("footer.description")}
           </p>
 
-          <div className="mt-6 space-y-3 text-sm text-gray-600 dark:text-[#9CA3AF]">
+          <div className="mt-6 space-y-3 text-sm text-gray-400 dark:text-[#9CA3AF]">
             <div className="flex items-center gap-2">
               <Mail size={16} />
               salom@bilimgoh.com
@@ -88,14 +88,14 @@ export default function Footer() {
 
         {/* Product */}
         <motion.div variants={fadeUp}>
-          <h4 className="font-semibold text-gray-900 dark:text-[#E5E7EB] mb-4">
+          <h4 className="font-semibold text-white mb-4">
             {t("footer.product")}
           </h4>
 
           <ul className="space-y-2 text-gray-600 dark:text-[#9CA3AF] text-sm">
             {footerLinks.product.map((link, index) => (
               <li key={index}>
-                <Link href="#" className="hover:text-green-500 transition">
+                <Link href="#" className="hover:text-green-400 text-gray-400 transition">
                   {link}
                 </Link>
               </li>
@@ -105,7 +105,7 @@ export default function Footer() {
 
         {/* Company */}
         <motion.div variants={fadeUp}>
-          <h4 className="font-semibold text-gray-900 dark:text-[#E5E7EB] mb-4">
+          <h4 className="font-semibold text-white dark:text-[#E5E7EB] mb-4">
             {t("footer.company")}
           </h4>
 
@@ -122,7 +122,7 @@ export default function Footer() {
 
         {/* Support */}
         <motion.div variants={fadeUp}>
-          <h4 className="font-semibold text-gray-900 dark:text-[#E5E7EB] mb-4">
+          <h4 className="font-semibold text-white dark:text-[#E5E7EB] mb-4">
             {t("footer.support")}
           </h4>
 
@@ -139,7 +139,7 @@ export default function Footer() {
 
         {/* Help Center */}
         <motion.div variants={fadeUp}>
-          <h4 className="font-semibold text-gray-900 dark:text-[#E5E7EB] mb-4">
+          <h4 className="font-semibold text-white dark:text-[#E5E7EB] mb-4">
             {t("footer.helpCenter")}
           </h4>
 
@@ -161,22 +161,22 @@ export default function Footer() {
         className="border-t border-gray-200 dark:border-[#1F2937] py-6"
       >
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-500 dark:text-[#9CA3AF]">
+          <p className="text-sm text-gray-400 dark:text-[#9CA3AF]">
             {t("footer.copyright")}
           </p>
 
           <div className="flex gap-4 text-gray-500 dark:text-[#9CA3AF]">
             <Twitter
               size={18}
-              className="hover:text-green-500 hover:scale-110 cursor-pointer transition"
+              className="hover:text-green-400 hover:scale-110 cursor-pointer transition text-gray-400"
             />
             <Linkedin
               size={18}
-              className="hover:text-green-500 hover:scale-110 cursor-pointer transition"
+              className="hover:text-green-400 hover:scale-110 cursor-pointer transition text-gray-400"
             />
             <Github
               size={18}
-              className="hover:text-green-500 hover:scale-110 cursor-pointer transition"
+              className="hover:text-green-400 hover:scale-110 cursor-pointer transition text-gray-400"
             />
           </div>
         </div>

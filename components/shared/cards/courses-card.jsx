@@ -5,9 +5,10 @@ import { useState } from "react";
 import { Clock, Users, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import courses from "../../../constants";
 
-export default function Courses() {
+export default function Courses({ simpleMode = false, forcedCategory = null }) {
   const categories = [
     "Til kurslari",
     "Aniq fanlar",
@@ -22,15 +23,6 @@ export default function Courses() {
   // 🔹 ACTIVE CATEGORY
   const [activeCategory, setActiveCategory] = useState("Til kurslari");
   const { t } = useTranslation();
-
-  const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
 
   const fadeUp = {
     hidden: {
@@ -47,382 +39,127 @@ export default function Courses() {
     },
   };
 
-  const cardAnimation = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.95,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
   // 🔹 COURSES DATA
-  const courses = [
-    // TIL KURSLARI (4 ta)
-    {
-      id: 1,
-      category: "Til kurslari",
-      title: "Ingliz tili",
-      instructor: "Teacher Abdulloh",
-      image: "/assets/courses/course-img-1.jpg",
-      duration: "6 oy",
-      students: "2.4K",
-      rating: "4.9",
-      price: "200 000 so'm",
-    },
-    {
-      id: 2,
-      category: "Til kurslari",
-      title: "Rus tili",
-      instructor: "Ivan Petrov",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "5 oy",
-      students: "1.8K",
-      rating: "4.8",
-      price: "180 000 so'm",
-    },
-    {
-      id: 5,
-      category: "Til kurslari",
-      title: "IELTS Intensive",
-      instructor: "Teacher Abdulloh",
-      image: "/assets/courses/course-img-4.jpg",
-      duration: "3 oy",
-      students: "1.5K",
-      rating: "5.0",
-      price: "300 000 so'm",
-    },
-    {
-      id: 6,
-      category: "Til kurslari",
-      title: "CEFR C1",
-      instructor: "Teacher Abdulloh",
-      image: "/assets/courses/course-img-3.jpg",
-      duration: "4 oy",
-      students: "900",
-      rating: "4.9",
-      price: "280 000 so'm",
-    },
 
-    // ANIQ FANLAR (3 ta)
-    {
-      id: 3,
-      category: "Aniq fanlar",
-      title: "Matematika",
-      instructor: "Ali Karimov",
-      image: "/assets/courses/course-img-1.jpg",
-      duration: "4 oy",
-      students: "3.2K",
-      rating: "4.9",
-      price: "220 000 so'm",
-    },
-    {
-      id: 8,
-      category: "Aniq fanlar",
-      title: "Fizika",
-      instructor: "Bekzod Rahimov",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "4 oy",
-      students: "1.9K",
-      rating: "4.8",
-      price: "230 000 so'm",
-    },
-    {
-      id: 9,
-      category: "Aniq fanlar",
-      title: "Kimyo",
-      instructor: "Dilnoza Axmedova",
-      image: "/assets/courses/course-img-4.jpg",
-      duration: "4 oy",
-      students: "1.4K",
-      rating: "4.7",
-      price: "220 000 so'm",
-    },
-
-    // IT KURSLAR (4 ta)
-    {
-      id: 4,
-      category: "IT kurslar",
-      title: "Frontend React",
-      instructor: "Sarah Johnson",
-      image: "/assets/courses/course-img-3.jpg",
-      duration: "5 oy",
-      students: "2.1K",
-      rating: "4.8",
-      price: "350 000 so'm",
-    },
-    {
-      id: 10,
-      category: "IT kurslar",
-      title: "Backend Node.js",
-      instructor: "John Smith",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "6 oy",
-      students: "1.6K",
-      rating: "4.8",
-      price: "370 000 so'm",
-    },
-    {
-      id: 11,
-      category: "IT kurslar",
-      title: "UI/UX Design",
-      instructor: "Emily Clark",
-      image: "/assets/courses/course-img-4.jpg",
-      duration: "3 oy",
-      students: "1.2K",
-      rating: "4.9",
-      price: "300 000 so'm",
-    },
-    {
-      id: 12,
-      category: "IT kurslar",
-      title: "Python Programming",
-      instructor: "Michael Brown",
-      image: "/assets/courses/course-img-1.jpg",
-      duration: "5 oy",
-      students: "2.3K",
-      rating: "4.9",
-      price: "340 000 so'm",
-    },
-
-    // IJTIMOIY FANLAR (2 ta)
-    {
-      id: 13,
-      category: "Ijtimoiy fanlar",
-      title: "Tarix",
-      instructor: "Sardor Islomov",
-      image: "/assets/courses/course-img-4.jpg",
-      duration: "4 oy",
-      students: "1.3K",
-      rating: "4.7",
-      price: "200 000 so'm",
-    },
-    {
-      id: 14,
-      category: "Ijtimoiy fanlar",
-      title: "Huquq",
-      instructor: "Aziza Nurmatova",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "3 oy",
-      students: "800",
-      rating: "4.8",
-      price: "210 000 so'm",
-    },
-
-    // IMTIHON TAYYORLOV (3 ta)
-    {
-      id: 15,
-      category: "Imtihon tayyorlov",
-      title: "IELTS Full Course",
-      instructor: "Teacher Abdulloh",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "4 oy",
-      students: "2K",
-      rating: "5.0",
-      price: "320 000 so'm",
-    },
-    {
-      id: 16,
-      category: "Imtihon tayyorlov",
-      title: "CEFR B2",
-      instructor: "Teacher Abdulloh",
-      image: "/assets/courses/course-img-1.jpg",
-      duration: "3 oy",
-      students: "1.1K",
-      rating: "4.9",
-      price: "270 000 so'm",
-    },
-    {
-      id: 17,
-      category: "Imtihon tayyorlov",
-      title: "DTM tayyorlov",
-      instructor: "Ali Karimov",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "6 oy",
-      students: "2.5K",
-      rating: "4.8",
-      price: "250 000 so'm",
-    },
-
-    // MAKTAB TAYYORLOV (2 ta)
-    {
-      id: 18,
-      category: "Maktab tayyorlov",
-      title: "1-4 sinf umumiy",
-      instructor: "Dilafruz Xasanova",
-      image: "/assets/courses/course-img-3.jpg",
-      duration: "6 oy",
-      students: "1.7K",
-      rating: "4.8",
-      price: "180 000 so'm",
-    },
-    {
-      id: 19,
-      category: "Maktab tayyorlov",
-      title: "Prezident maktabi",
-      instructor: "Ali Karimov",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "5 oy",
-      students: "900",
-      rating: "4.9",
-      price: "300 000 so'm",
-    },
-
-    // KASBIY RIVOJLANISH (2 ta)
-    {
-      id: 20,
-      category: "Kasbiy rivojlanish",
-      title: "SMM Marketing",
-      instructor: "Shohruh",
-      image: "/assets/courses/course-img-1.jpg",
-      duration: "2 oy",
-      students: "1.2K",
-      rating: "4.9",
-      price: "350 000 so'm",
-    },
-    {
-      id: 21,
-      category: "Kasbiy rivojlanish",
-      title: "Copywriting",
-      instructor: "Azizbek",
-      image: "/assets/courses/course-img-2.jpg",
-      duration: "2 oy",
-      students: "700",
-      rating: "4.8",
-      price: "300 000 so'm",
-    },
-
-    // BOLALAR KURSLARI (1 ta)
-    {
-      id: 22,
-      category: "Bolalar kurslari",
-      title: "Kids English",
-      instructor: "Teacher Abdulloh",
-      image: "/assets/courses/course-img-4.jpg",
-      duration: "6 oy",
-      students: "2K",
-      rating: "4.9",
-      price: "180 000 so'm",
-    },
-  ];
-
-  const filteredCourses =
-    activeCategory === "Barchasi"
+  const hasForcedCategory = Boolean(forcedCategory);
+  const filteredCourses = hasForcedCategory
+    ? forcedCategory === "all"
       ? courses
-      : courses.filter((c) => c.category === activeCategory);
-
-      const router = useRouter();
+      : courses.filter((c) => c.category === forcedCategory)
+    : simpleMode
+      ? courses
+      : activeCategory === "Barchasi"
+        ? courses
+        : courses.filter((c) => c.category === activeCategory);
 
   return (
-    <section className="py-20 bg-white dark:bg-[#0B0F14]">
+    <section className={simpleMode ? "bg-white" : "py-20 bg-white dark:bg-[#0B0F14]"}>
       <section className="courses-section">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} className="text-center mb-14">
-            <p className="text-green-500 font-semibold tracking-widest text-sm">
-              {t("courses.badge")}
-            </p>
+        <div className={simpleMode ? "mx-auto w-full" : "max-w-7xl mx-auto px-6"}>
+          {!simpleMode && (
+            <motion.div variants={fadeUp} className="text-center mb-14">
+              <p className="text-green-500 font-semibold tracking-widest text-sm">
+                {t("courses.badge")}
+              </p>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#E5E7EB] mt-3">
-              {t("courses.title")}{" "}
-              <span className="text-green-500">
-                {t("courses.titleHighlight")}
-              </span>
-            </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#E5E7EB] mt-3">
+                {t("courses.title")}{" "}
+                <span className="text-green-500">
+                  {t("courses.titleHighlight")}
+                </span>
+              </h2>
 
-            <p className="text-gray-600 dark:text-[#9CA3AF] max-w-xl mx-auto mt-4">
-              {t("courses.description")}
-            </p>
-          </motion.div>
+              <p className="text-gray-600 dark:text-[#9CA3AF] max-w-xl mx-auto mt-4">
+                {t("courses.description")}
+              </p>
+            </motion.div>
+          )}
 
-          <div className="flex justify-center mb-12">
-            <div className="flex gap-2 w-full bg-gray-100 dark:bg-[#111827] p-2 rounded-full">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 w-full rounded-full text-[12px] transition ${
-                    activeCategory === cat
-                      ? "bg-green-500 text-white"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#1F2937]"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+          {!simpleMode && !hasForcedCategory && (
+            <div className="flex justify-center mb-12">
+              <div className="flex gap-2 w-full bg-gray-100 dark:bg-[#111827] p-2 rounded-full">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-5 py-2 w-full rounded-full text-[12px] transition ${
+                      activeCategory === cat
+                        ? "bg-green-500 text-white"
+                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#1F2937]"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className={`${simpleMode ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"}`}>
             {filteredCourses.map((course) => (
-              <motion.div
-                key={course.id}
-                onClick={() => router.push(`/courses/${course.id}`)}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-[#0F172A] border rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
-              >
-                {/* IMAGE */}
-                <Image
-                  src={course.image}
-                  width={400}
-                  height={250}
-                  alt={course.title}
-                  className="w-full h-52 object-cover"
-                />
+              <Link key={course.id} href={`/courses/${course.id}`}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white dark:bg-[#0F172A] border rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
+                >
+                  {/* IMAGE */}
+                  <Image
+                    src={course.image}
+                    width={400}
+                    height={250}
+                    alt={course.title}
+                    className="w-full h-52 object-cover"
+                  />
 
-                {/* CONTENT */}
-                <div className="p-5">
-                  <h3 className="font-semibold mb-2">{course.title}</h3>
+                  {/* CONTENT */}
+                  <div className="p-5">
+                    <h3 className="font-semibold mb-2">{course.title}</h3>
 
-                  <p className="text-sm text-gray-500 mb-3">
-                    {course.instructor}
-                  </p>
+                    <p className="text-sm text-gray-500 mb-3">
+                      {course.instructor}
+                    </p>
 
-                  {/* STATS */}
-                  <div className="flex justify-between text-sm text-gray-500 mb-4">
-                    <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      {course.duration}
+                    {/* STATS */}
+                    <div className="flex justify-between text-sm text-gray-500 mb-4">
+                      <div className="flex items-center gap-1">
+                        <Clock size={14} />
+                        {course.duration}
+                      </div>
+
+                      <div className="flex items-center gap-1">
+                        <Users size={14} />
+                        {course.students}
+                      </div>
+
+                      <div className="flex items-center gap-1 text-yellow-400">
+                        <Star size={14} fill="currentColor" />
+                        {course.rating}
+                      </div>
                     </div>
 
-                    <div className="flex items-center gap-1">
-                      <Users size={14} />
-                      {course.students}
-                    </div>
+                    {/* PRICE */}
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold">{course.price}</span>
 
-                    <div className="flex items-center gap-1 text-yellow-400">
-                      <Star size={14} fill="currentColor" />
-                      {course.rating}
+                      <button className="text-green-500 hover:text-green-400">
+                        Batafsil
+                      </button>
                     </div>
                   </div>
-
-                  {/* PRICE */}
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold">{course.price}</span>
-
-                    <button className="text-green-500 hover:text-green-400">
-                      Batafsil
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
 
-          <motion.div variants={fadeUp} className="flex justify-center mt-14">
-            <button className="border border-gray-300 dark:border-[#1F2937] px-6 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-[#111827] dark:text-[#E5E7EB] transition">
-              {t("courses.viewAll")}
-            </button>
-          </motion.div>
+          {!simpleMode && (
+            <motion.div variants={fadeUp} className="flex justify-center mt-14">
+              <button className="border border-gray-300 dark:border-[#1F2937] px-6 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-[#111827] dark:text-[#E5E7EB] transition">
+                {t("courses.viewAll")}
+              </button>
+            </motion.div>
+          )}
 
-          {filteredCourses.length === 0 && (
+          {!simpleMode && filteredCourses.length === 0 && (
             <p className="text-center mt-10 text-gray-500">
               Bu kategoriyada kurslar mavjud emas
             </p>

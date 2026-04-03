@@ -2,7 +2,7 @@
   "navbar": {
     "home": "Home",
     "courses": "Courses",
-    "mentor": "Mentors",
+    "mentor": "Team",
     "group": "Community",
     "testimonials": "Testimonials",
     "pricing": "Pricing"
@@ -97,30 +97,38 @@
     ]
   },
   "mentors": {
-    "badge": "MENTORS",
-    "title": "Learn From Industry",
-    "titleHighlight": "Experts",
-    "description": "Our mentors are industry leaders with years of experience in their respective fields.",
-
-    "students": "Students",
-    "courses": "Courses",
+    "badge": "TEAM",
+    "title": "The idea and team",
+    "titleHighlight": "behind Bilimgoh",
+    "description": "The Bilimgoh platform was created by a team that brings together education, business, and technology.",
 
     "items": [
       {
-        "role": "Web Development Expert",
-        "bio": "8+ years experience in data analysis and machine learning. Former Data Scientist at Facebook."
+        "name": "Abdulloh Rahmatullayev",
+        "role": "CEO & Co-Founder",
+        "bio": "Founder of education and various business projects. He works on developing modern education systems and building platforms that deliver real results for young people.",
+        "primaryValue": "5+",
+        "primaryLabel": "years of experience",
+        "secondaryValue": "10,000+",
+        "secondaryLabel": "students mentored"
       },
       {
-        "role": "Digital Marketing Guru",
-        "bio": "10+ years experience in digital marketing and SEO strategies. Former Marketing Manager at Google."
+        "name": "Kaxxarov Akmaljon",
+        "role": "Co-Founder & Investor",
+        "bio": "Entrepreneur and patron. He contributes to the platform’s growth by supporting education projects and investing in youth development.",
+        "primaryValue": "Multiple",
+        "primaryLabel": "project investor",
+        "secondaryValue": "Active",
+        "secondaryLabel": "in social initiatives"
       },
       {
-        "role": "Data Science Specialist",
-        "bio": "7+ years experience in data analysis and machine learning. Former Data Scientist at Facebook."
-      },
-      {
-        "role": "Graphic Design Artist",
-        "bio": "9+ years experience in graphic design and visual arts. Former Creative Director at Adobe."
+        "name": "Najmiddin",
+        "role": "CTO & Co-Founder",
+        "bio": "IT specialist. He ensures the platform’s technical architecture, functionality, and stability. He works on all technological solutions behind Bilimgoh.",
+        "primaryValue": "Full-stack",
+        "primaryLabel": "developer",
+        "secondaryValue": "Backend/Frontend",
+        "secondaryLabel": "management"
       }
     ]
   },

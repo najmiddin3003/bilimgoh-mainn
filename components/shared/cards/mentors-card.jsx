@@ -11,43 +11,39 @@ export default function Mentors() {
   const mentors = [
     {
       id: 1,
-      name: "John Smith",
+      name: t("mentors.items.0.name"),
       role: t("mentors.items.0.role"),
-      image: "/assets/avatars/mentor-avatar-1.jpg",
+      image: "/assets/avatars/mentor-avatar-1-1.jpg",
       rating: 4.9,
       bio: t("mentors.items.0.bio"),
-      students: "20K+",
-      courses: 10,
+      primaryValue: t("mentors.items.0.primaryValue"),
+      primaryLabel: t("mentors.items.0.primaryLabel"),
+      secondaryValue: t("mentors.items.0.secondaryValue"),
+      secondaryLabel: t("mentors.items.0.secondaryLabel"),
     },
     {
       id: 2,
-      name: "Sarah Johnson",
+      name: t("mentors.items.1.name"),
       role: t("mentors.items.1.role"),
       image: "/assets/avatars/mentor-avatar-2.jpg",
       rating: 4.8,
       bio: t("mentors.items.1.bio"),
-      students: "15K+",
-      courses: 8,
+      primaryValue: t("mentors.items.1.primaryValue"),
+      primaryLabel: t("mentors.items.1.primaryLabel"),
+      secondaryValue: t("mentors.items.1.secondaryValue"),
+      secondaryLabel: t("mentors.items.1.secondaryLabel"),
     },
     {
       id: 3,
-      name: "Mike Chen",
+      name: t("mentors.items.2.name"),
       role: t("mentors.items.2.role"),
-      image: "/assets/avatars/mentor-avatar-3.jpg",
+      image: "/assets/avatars/mentor-avatar-2.jpg",
       rating: 4.9,
       bio: t("mentors.items.2.bio"),
-      students: "18K+",
-      courses: 12,
-    },
-    {
-      id: 4,
-      name: "Emma Davis",
-      role: t("mentors.items.3.role"),
-      image: "/assets/avatars/mentor-avatar-4.jpg",
-      rating: 4.8,
-      bio: t("mentors.items.3.bio"),
-      students: "22K+",
-      courses: 9,
+      primaryValue: t("mentors.items.2.primaryValue"),
+      primaryLabel: t("mentors.items.2.primaryLabel"),
+      secondaryValue: t("mentors.items.2.secondaryValue"),
+      secondaryLabel: t("mentors.items.2.secondaryLabel"),
     },
   ];
 
@@ -123,7 +119,7 @@ export default function Mentors() {
         {/* Cards */}
         <motion.div
           variants={container}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {mentors.map((mentor) => (
             <motion.div
@@ -141,7 +137,7 @@ export default function Mentors() {
                   src={mentor.image}
                   fill
                   alt={mentor.name}
-                  className="rounded-full group-hover:scale-[1.1] transition duration-300 group-hover:rotate-[10deg] object-cover border-4 border-green-400"
+                  className="rounded-full group-hover:scale-[1.1] transition duration-300 group-hover:rotate-10 object-cover border-4 border-green-400"
                 />
 
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
@@ -166,11 +162,11 @@ export default function Mentors() {
               {/* Stats */}
               <div className="flex justify-center gap-6 text-sm text-gray-700 dark:text-[#9CA3AF] mb-5">
                 <span>
-                  <b>{mentor.students}</b> {t("mentors.students")}
+                  <b>{mentor.primaryValue}</b> {mentor.primaryLabel}
                 </span>
 
                 <span>
-                  <b>{mentor.courses}</b> {t("mentors.courses")}
+                  <b>{mentor.secondaryValue}</b> {mentor.secondaryLabel}
                 </span>
               </div>
 

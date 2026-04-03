@@ -2,7 +2,7 @@
   "navbar": {
     "home": "Bosh sahifa",
     "courses": "Kurslar",
-    "mentor": "Ustozlar",
+    "mentor": "Jamoa",
     "group": "Hamjamiyat",
     "testimonials": "Fikrlar",
     "pricing": "Narxlar",
@@ -98,30 +98,38 @@
     ]
   },
   "mentors": {
-    "badge": "MENTORLAR",
-    "title": "Sohadagi",
-    "titleHighlight": "mutaxassislardan o‘rganing",
-    "description": "Bizning mentorlar o‘z sohalarida ko‘p yillik tajribaga ega yetakchi mutaxassislardir.",
-
-    "students": "O‘quvchilar",
-    "courses": "Kurslar",
+    "badge": "JAMOA",
+    "title": "Bilimgoh ortidagi",
+    "titleHighlight": "g‘oya va jamoa",
+    "description": "Bilimgoh platformasi ta’lim, biznes va texnologiyani birlashtirgan jamoa tomonidan yaratilgan.",
 
     "items": [
       {
-        "role": "Web dasturlash mutaxassisi",
-        "bio": "Ma'lumotlar tahlili va mashinaviy o‘rganishda 8+ yillik tajriba. Facebook kompaniyasida Data Scientist bo‘lib ishlagan."
+        "name": "Abdulloh Rahmatullayev",
+        "role": "CEO & Co-Founder",
+        "bio": "Ta’lim va turli biznes loyihalar asoschisi. Zamonaviy ta’lim tizimini rivojlantirish va yoshlar uchun real natija beradigan platformalar yaratish ustida ishlaydi.",
+        "primaryValue": "5+",
+        "primaryLabel": "yil tajriba",
+        "secondaryValue": "10,000+",
+        "secondaryLabel": "o‘quvchi bilan ishlagan"
       },
       {
-        "role": "Digital marketing mutaxassisi",
-        "bio": "Digital marketing va SEO strategiyalarida 10+ yillik tajriba. Google kompaniyasida marketing menejeri bo‘lib ishlagan."
+        "name": "Kaxxarov Akmaljon",
+        "role": "Co-Founder & Investor",
+        "bio": "Tadbirkor va metsenat. Ta’lim loyihalarini qo‘llab-quvvatlash va yoshlar rivoji uchun investitsiya qilish orqali platformaning o‘sishiga hissa qo‘shadi.",
+        "primaryValue": "Ko‘plab",
+        "primaryLabel": "loyihalar investori",
+        "secondaryValue": "Faol",
+        "secondaryLabel": "ijtimoiy loyihalarda"
       },
       {
-        "role": "Data Science mutaxassisi",
-        "bio": "Ma'lumotlar tahlili va mashinaviy o‘rganishda 7+ yillik tajriba. Facebook kompaniyasida Data Scientist bo‘lib ishlagan."
-      },
-      {
-        "role": "Grafik dizayn mutaxassisi",
-        "bio": "Grafik dizayn va vizual san'atda 9+ yillik tajriba. Adobe kompaniyasida Creative Director bo‘lib ishlagan."
+        "name": "Najmiddin",
+        "role": "CTO & Co-Founder",
+        "bio": "IT mutaxassis. Platformaning texnik arxitekturasi, funksionalligi va barqaror ishlashini ta’minlaydi. Bilimgoh’ning barcha texnologik yechimlari ustida ishlaydi.",
+        "primaryValue": "Full-stack",
+        "primaryLabel": "developer",
+        "secondaryValue": "Backend/Frontend",
+        "secondaryLabel": "boshqaruvi"
       }
     ]
   },

@@ -194,7 +194,7 @@ export default function CheckoutPage() {
 							</div>
 							<div className='flex gap-3'>
 								<a
-									href='https://inglizcha.uz'
+									href='https://admin-bilimgoh.vercel.app/'
 									target='_blank'
 									rel='noopener noreferrer'
 									className='rounded-xl bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(16,185,129,0.35)] transition hover:bg-emerald-600'

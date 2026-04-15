@@ -10,10 +10,12 @@ import Community from "../shared/cards/community-card";
 import Testimonials from "../shared/cards/testimonials";
 import Footer from "../shared/footer";
 import Navbar from "./navbar";
-import CursorFollower from './cursor-follower';
+import CursorFollower from "./cursor-follower";
 import AnimatedSection from "./cards/framer-card";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import CompanyLogoSlider from "./our-partners";
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -133,9 +135,11 @@ export default function Hero() {
                 {t("buttons.start")}
               </button>
 
-              <button className="border border-gray-300 dark:border-[#1F2937] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-[#111827] transition text-gray-800 dark:text-[#E5E7EB]">
-                {t("buttons.youtubeChanel")}
-              </button>
+              <Link href="/pricing">
+                <button className="border border-gray-300 dark:border-[#1F2937] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-[#111827] transition text-gray-800 dark:text-[#E5E7EB]">
+                  {t("buttons.youtubeChanel")}
+                </button>
+              </Link>
             </motion.div>
 
             {/* Stats */}
@@ -194,6 +198,7 @@ export default function Hero() {
       <Mentors />
       <Community />
       <Testimonials />
+      <CompanyLogoSlider />
       <Footer />
     </>
   );

@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "@/i18n/config";
 import  Providers  from "@/components/providers/clerk-provider";
+import PremiumCursor from "@/components/shared/cursor-follower";
 
 
 const montSerrat = Montserrat({
@@ -31,6 +32,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <PremiumCursor />
             {children}
           </ThemeProvider>
         </Providers>

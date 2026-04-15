@@ -14,7 +14,6 @@ export default function Mentors() {
       name: t("mentors.items.0.name"),
       role: t("mentors.items.0.role"),
       image: "/assets/avatars/mentor-avatar-1-1.jpg",
-      rating: 4.9,
       bio: t("mentors.items.0.bio"),
       primaryValue: t("mentors.items.0.primaryValue"),
       primaryLabel: t("mentors.items.0.primaryLabel"),
@@ -26,7 +25,6 @@ export default function Mentors() {
       name: t("mentors.items.1.name"),
       role: t("mentors.items.1.role"),
       image: "/assets/avatars/mentor-avatar-2.jpg",
-      rating: 4.8,
       bio: t("mentors.items.1.bio"),
       primaryValue: t("mentors.items.1.primaryValue"),
       primaryLabel: t("mentors.items.1.primaryLabel"),
@@ -38,7 +36,6 @@ export default function Mentors() {
       name: t("mentors.items.2.name"),
       role: t("mentors.items.2.role"),
       image: "/assets/avatars/mentor-avatar-2.jpg",
-      rating: 4.9,
       bio: t("mentors.items.2.bio"),
       primaryValue: t("mentors.items.2.primaryValue"),
       primaryLabel: t("mentors.items.2.primaryLabel"),
@@ -139,11 +136,6 @@ export default function Mentors() {
                   alt={mentor.name}
                   className="rounded-full group-hover:scale-[1.1] transition duration-300 group-hover:rotate-10 object-cover border-4 border-green-400"
                 />
-
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
-                  {mentor.rating}
-                  <Star size={12} fill="white" />
-                </div>
               </motion.div>
 
               {/* Info */}

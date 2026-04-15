@@ -8,6 +8,7 @@ import LanguageSwitcher from "./language-dropdown";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -15,6 +16,8 @@ export default function Navbar() {
 
   const { isSignedIn } = useUser();
   const { t } = useTranslation();
+
+  const pathname = usePathname();
 
   const menu = [
     { name: t("navbar.home"), link: "#" },
@@ -56,7 +59,7 @@ export default function Navbar() {
           {menu.map((item, i) => (
             <li key={i}>
               <Link
-                href={item.link}
+                href={`${pathname === "/pricing" ? "/" : item.link}`}
                 className="hover:text-green-500 transition"
               >
                 {item.name}

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Navbar from "../navbar";
 
 const plans = [
@@ -51,7 +51,7 @@ const plans = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   show: {
     transition: {
@@ -60,12 +60,15 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: "easeOut" },
+    transition: {
+      duration: 0.55,
+      ease: "easeOut",
+    },
   },
 };
 
@@ -89,7 +92,6 @@ export default function PricingPlans() {
       <Navbar />
 
       <section className="relative overflow-hidden bg-white py-20 text-slate-900 transition-colors duration-300 dark:bg-[#020817] dark:text-white">
-        {/* background glows */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute left-[-120px] top-[-120px] h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl dark:bg-emerald-500/12" />
           <div className="absolute bottom-[-140px] right-[-120px] h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl dark:bg-cyan-500/10" />
@@ -97,7 +99,6 @@ export default function PricingPlans() {
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Hero */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +128,6 @@ export default function PricingPlans() {
             </p>
           </motion.div>
 
-          {/* Cards */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -135,7 +135,7 @@ export default function PricingPlans() {
             viewport={{ once: true, amount: 0.15 }}
             className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-end"
           >
-            {plans.map((plan, index) => (
+            {plans.map((plan) => (
               <motion.div
                 key={plan.name}
                 variants={itemVariants}

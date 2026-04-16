@@ -98,24 +98,6 @@ export default function OurPartners() {
             ))}
           </div>
         </div>
-
-        {/* Grid */}
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {companies.map((company) => (
-            <div
-              key={company.name}
-              className="group flex h-[88px] items-center justify-center rounded-2xl border border-black/10 bg-white/80 px-4 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-white/5 md:h-[96px]"
-            >
-              <img
-                src={company.logo}
-                alt={company.name}
-                width={130}
-                height={44}
-                className="max-h-10 w-auto object-contain opacity-80 grayscale transition duration-300 group-hover:grayscale-0 group-hover:opacity-100"
-              />
-            </div>
-          ))}
-        </div>
       </div>
 
       <style jsx>{`

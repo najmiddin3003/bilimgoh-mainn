@@ -35,7 +35,7 @@ export default function Mentors() {
       id: 3,
       name: t("mentors.items.2.name"),
       role: t("mentors.items.2.role"),
-      image: "/assets/avatars/image.png",
+      image: "/assets/avatars/760A6318.png",
       bio: t("mentors.items.2.bio"),
       primaryValue: t("mentors.items.2.primaryValue"),
       primaryLabel: t("mentors.items.2.primaryLabel"),
@@ -127,16 +127,36 @@ export default function Mentors() {
             >
               {/* Avatar */}
               <motion.div
-                whileHover={{ scale: 1.1 }}
-                className="relative w-30 h-30 mx-auto mb-4"
-              >
-                <Image
-                  src={mentor.image}
-                  alt={mentor.name}
-                  fill
-                  className="rounded-full group-hover:scale-[1.1] transition duration-300 group-hover:rotate-10 object-cover border-4 border-green-400"
-                />
-              </motion.div>
+  whileHover={{ scale: 1.08 }}
+  transition={{ duration: 0.3 }}
+  className="relative w-32 h-32 mx-auto mb-6 group"
+>
+  {/* Glow (faqat hoverda kuchayadi) */}
+  <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl opacity-40 group-hover:opacity-100 transition duration-500"></div>
+
+  {/* Gradient border DOIM KO‘RINADI */}
+  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-green-400 via-emerald-500 to-green-600 p-[3px]">
+    
+    {/* Inner container */}
+    <div className="w-full h-full rounded-full bg-background overflow-hidden">
+      
+      {/* Image */}
+      <motion.div
+        whileHover={{ rotate: 6, scale: 1.1 }}
+        transition={{ duration: 0.3 }}
+        className="w-full h-full"
+      >
+        <Image
+          src={mentor.image}
+          alt={mentor.name}
+          fill
+          className="object-cover rounded-full border-green-500 border-4"
+        />
+      </motion.div>
+
+    </div>
+  </div>
+</motion.div>
 
               {/* Info */}
               <h3 className="font-semibold text-lg text-gray-900 dark:text-[#E5E7EB]">

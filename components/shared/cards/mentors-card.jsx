@@ -35,7 +35,7 @@ export default function Mentors() {
       id: 3,
       name: t("mentors.items.2.name"),
       role: t("mentors.items.2.role"),
-      image: "/assets/avatars/mentor-avatar-2.jpg",
+      image: "/assets/avatars/image.png",
       bio: t("mentors.items.2.bio"),
       primaryValue: t("mentors.items.2.primaryValue"),
       primaryLabel: t("mentors.items.2.primaryLabel"),
@@ -122,18 +122,18 @@ export default function Mentors() {
             <motion.div
               key={mentor.id}
               variants={cardAnimation}
-             
+
               className="group hover:scale-[1.02] bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition duration-300 p-6 text-center"
             >
               {/* Avatar */}
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className="relative w-24 h-24 mx-auto mb-4"
+                className="relative w-30 h-30 mx-auto mb-4"
               >
                 <Image
                   src={mentor.image}
-                  fill
                   alt={mentor.name}
+                  fill
                   className="rounded-full group-hover:scale-[1.1] transition duration-300 group-hover:rotate-10 object-cover border-4 border-green-400"
                 />
               </motion.div>

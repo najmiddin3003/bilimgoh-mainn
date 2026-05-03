@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import Logo from "./logo";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -47,12 +48,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         {/* LOGO */}
-        <Link href="/">
-          <div className="flex items-center gap-2 font-semibold text-lg text-gray-900 dark:text-white">
-            <BookOpenText className="text-green-500" />
-            Bilimgoh
-          </div>
-        </Link>
+       <Logo />
 
         {/* DESKTOP MENU */}
         <ul className="hidden lg:flex gap-8 text-gray-700 dark:text-gray-200 font-medium">
@@ -72,25 +68,21 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-4">
           <LanguageSwitcher />
           <div className="border rounded-md">
-          <ModeToggle />
+            <ModeToggle />
           </div>
 
-          {!isSignedIn ? (
-            <SignInButton mode="modal">
-              <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-md">
-                {t("buttons.getStarted")}
-              </button>
-            </SignInButton>
-          ) : (
-            <UserButton afterSignOutUrl="/" />
-          )}
+          <Link href={'/auth'}>
+          <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-md">
+            {t("buttons.getStarted")}
+          </button>
+          </Link>
         </div>
 
         {/* MOBILE RIGHT */}
         <div className="lg:hidden flex items-center gap-2">
           <LanguageSwitcher />
           <div className="border rounded-md">
-          <ModeToggle />
+            <ModeToggle />
           </div>
 
           <button

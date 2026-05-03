@@ -1,54 +1,37 @@
-'use client'
+"use client";
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PremiumCursor() {
-	const glow = useRef(null)
-	// const dot = useRef(null);
-	useEffect(() => {
-		const move = e => {
-			if (!glow.current) return // 🔥 MUHIM
+  const pathname = usePathname();
+  const glow = useRef(null);
 
-			const x = e.clientX
-			const y = e.clientY
+  const disabled = pathname?.startsWith("/auth");
 
-			glow.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`
-		}
+  useEffect(() => {
+    if (disabled) return;
 
-		window.addEventListener('mousemove', move)
+    const move = (e) => {
+      if (!glow.current) return;
 
-		return () => window.removeEventListener('mousemove', move)
-	}, [])
+      const x = e.clientX;
+      const y = e.clientY;
 
-	return (
-		<>
-			{/* glow */}
-			<div
-				ref={glow}
-				className='
-        fixed
-        w-[400px] h-[400px]
-        bg-green-400/20
-        blur-[160px]
-        rounded-full
-        pointer-events-none
-        z-40
-        transition-transform duration-100
-        '
-			/>
+      glow.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    };
 
-			{/* small dot */}
-			{/* <div
-        ref={dot}
-        className="
-        fixed
-        w-2 h-2
-        bg-green-400
-        rounded-full
-        pointer-events-none
-        z-50
-        "
-      /> */}
-		</>
-	)
+    window.addEventListener("mousemove", move);
+
+    return () => window.removeEventListener("mousemove", move);
+  }, [disabled]);
+
+  if (disabled) return null;
+
+  return (
+    <div
+      ref={glow}
+      className="pointer-events-none fixed z-40 h-[400px] w-[400px] rounded-full bg-green-400/20 blur-[160px] transition-transform duration-100"
+    />
+  );
 }

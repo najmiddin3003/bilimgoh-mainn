@@ -10,7 +10,6 @@ import Community from "../shared/cards/community-card";
 import Testimonials from "../shared/cards/testimonials";
 import Footer from "../shared/footer";
 import Navbar from "./navbar";
-import CursorFollower from "./cursor-follower";
 import AnimatedSection from "./cards/framer-card";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";

@@ -248,3 +248,190 @@ const courses = [
 ];
 
 export default courses;
+
+
+import {
+  GraduationCap,
+  BookOpen,
+  Users,
+  Award,
+  Code2,
+  Megaphone,
+  Globe,
+  PenTool,
+  Languages,
+  Star,
+} from "lucide-react"
+
+export const teachers = [
+  {
+    id: 1,
+    name: "Abdulloh Rahmatullayev",
+    role: "CEO & Co-Founder",
+    badge: "CEO & Co-Founder",
+    image: "/teachers/teacher-1.jpg",
+    bio: "Ta’lim va turli biznes loyihalar asoschisi. Zamonaviy ta’lim tizimini rivojlantirish ustida ishlaydi.",
+    stats: [
+      { icon: GraduationCap, label: "tajriba", value: "5+ yil" },
+      { icon: Users, label: "o‘quvchi bilan ishlagan", value: "10,000+" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 2,
+    name: "Kaxxarov Akmaljon",
+    role: "Co-Founder & Investor",
+    badge: "Investor",
+    image: "/teachers/teacher-2.jpg",
+    bio: "Ta’lim loyihalarini qo‘llab-quvvatlash va platforma o‘sishiga hissa qo‘shadi.",
+    stats: [
+      { icon: Award, label: "loyihalar investori", value: "Ko‘plab" },
+      { icon: Globe, label: "ijtimoiy loyihalar", value: "Faol" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 3,
+    name: "Najmiddin",
+    role: "CIO & Co-Founder",
+    badge: "CIO & Co-Founder",
+    image: "/teachers/teacher-3.jpg",
+    bio: "Platformaning texnik arxitekturasi, funksionalligi va barqaror ishlashini ta’minlaydi.",
+    stats: [
+      { icon: Code2, label: "developer", value: "Full-stack" },
+      { icon: Code2, label: "boshqaruvi", value: "Backend/Frontend" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 4,
+    name: "Nilufar Ergasheva",
+    role: "English Teacher",
+    badge: "IELTS Mentor",
+    image: "/teachers/teacher-4.jpg",
+    bio: "IELTS va General English yo‘nalishida o‘quvchilarga natijaga yo‘naltirilgan dars beradi.",
+    stats: [
+      { icon: Languages, label: "IELTS daraja", value: "8.0" },
+      { icon: Users, label: "o‘quvchi", value: "500+" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 5,
+    name: "Shaxriyor Karimov",
+    role: "Marketing Lead",
+    badge: "Marketing Lead",
+    image: "/teachers/teacher-5.jpg",
+    bio: "Bilimgoh brendi, reklama strategiyasi va foydalanuvchilar bilan aloqani rivojlantiradi.",
+    stats: [
+      { icon: Megaphone, label: "kampaniya", value: "50+" },
+      { icon: Users, label: "auditoriya", value: "50K+" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 6,
+    name: "Sevinch Ibrohimova",
+    role: "Community Lead",
+    badge: "Community Lead",
+    image: "/teachers/teacher-6.jpg",
+    bio: "Hamjamiyat bilan ishlash va foydalanuvchi tajribasini yaxshilash bo‘yicha mas’ul.",
+    stats: [
+      { icon: Users, label: "hamjamiyat", value: "20+" },
+      { icon: Star, label: "tajriba", value: "3+ yil" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 7,
+    name: "Azizbek Rasulov",
+    role: "Math Teacher",
+    badge: "Matematika",
+    image: "/teachers/teacher-7.jpg",
+    bio: "Matematika va mantiqiy fikrlash bo‘yicha kuchli metodikaga ega ustoz.",
+    stats: [
+      { icon: BookOpen, label: "kurslar", value: "12+" },
+      { icon: Users, label: "o‘quvchi", value: "700+" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 8,
+    name: "Madina Sobirova",
+    role: "Russian Teacher",
+    badge: "Rus tili",
+    image: "/teachers/teacher-8.jpg",
+    bio: "Rus tilini sodda, amaliy va bosqichma-bosqich o‘rgatishga ixtisoslashgan.",
+    stats: [
+      { icon: Languages, label: "tajriba", value: "4+ yil" },
+      { icon: BookOpen, label: "darslar", value: "300+" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 9,
+    name: "Javohir Aliyev",
+    role: "IT Mentor",
+    badge: "Frontend Mentor",
+    image: "/teachers/teacher-9.jpg",
+    bio: "Frontend dasturlash, React va zamonaviy web texnologiyalar bo‘yicha mentor.",
+    stats: [
+      { icon: Code2, label: "texnologiya", value: "React" },
+      { icon: Users, label: "shogird", value: "200+" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    id: 10,
+    name: "Gulnoza Tursunova",
+    role: "Writing Mentor",
+    badge: "Writing Expert",
+    image: "/teachers/teacher-10.jpg",
+    bio: "Academic writing, essay structure va imtihon yozuvlariga tayyorlash bo‘yicha mutaxassis.",
+    stats: [
+      { icon: PenTool, label: "writing", value: "C1+" },
+      { icon: Award, label: "natija", value: "High score" },
+    ],
+    socials: {
+      telegram: "#",
+      instagram: "#",
+      linkedin: "#",
+    },
+  },
+]

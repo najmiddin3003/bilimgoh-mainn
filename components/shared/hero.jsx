@@ -15,11 +15,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import CompanyLogoSlider from "./our-partners";
+import { TeachersCarousel } from "./teachers";
 
 export default function Hero() {
   const { t } = useTranslation();
 
   const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const container = {
     hidden: {},
@@ -56,21 +58,6 @@ export default function Hero() {
     },
   };
 
-  const zoomIn = {
-    hidden: {
-      opacity: 0,
-      scale: 0.9,
-    },
-    show: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
   const images = [
     "/assets/images/hero1.jpg",
     "/assets/images/hero2.jpg",
@@ -80,12 +67,14 @@ export default function Hero() {
   ];
 
   useEffect(() => {
+    if (isHovered) return undefined;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered, images.length]);
 
   return (
     <>
@@ -170,7 +159,11 @@ export default function Hero() {
             </div>
 
             {/* image */}
-            <div className="relative z-20 rounded-3xl overflow-hidden shadow-2xl shadow-black/40 border border-gray-400 dark:border-[#1F2937] p-3">
+            <div
+              className="relative z-20 rounded-3xl overflow-hidden shadow-2xl shadow-black/40 border border-gray-400 dark:border-[#1F2937] p-3"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={images[index]}
@@ -194,10 +187,11 @@ export default function Hero() {
       </motion.section>
 
       <Courses />
-      <Mentors />
+      <TeachersCarousel />
       <Community />
       <Testimonials />
       <CompanyLogoSlider />
+      <Mentors />
       <Footer />
     </>
   );

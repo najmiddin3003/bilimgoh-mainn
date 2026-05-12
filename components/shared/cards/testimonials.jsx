@@ -1,73 +1,71 @@
 "use client";
 
-import Image from "next/image";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+
+const AVATAR_COLORS = [
+  "from-emerald-400 to-teal-500",
+  "from-violet-500 to-purple-500",
+  "from-emerald-500 to-green-600",
+  "from-rose-500 to-pink-500",
+  "from-fuchsia-500 to-purple-500",
+  "from-emerald-400 to-emerald-600",
+  "from-sky-500 to-blue-500",
+  "from-orange-500 to-amber-500",
+];
+
+const getInitials = (name = "") =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
 
 export default function Testimonials() {
   const { t } = useTranslation();
 
-  const testimonials = t("testimonials.items", { returnObjects: true });
+  const rawItems = t("testimonials.items", { returnObjects: true });
+  const testimonials = Array.isArray(rawItems) ? rawItems : [];
 
   const container = {
     hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.18,
-      },
-    },
+    show: { transition: { staggerChildren: 0.12 } },
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   const cardAnimation = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.95,
-    },
+    hidden: { opacity: 0, y: 40, scale: 0.96 },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.55, ease: "easeOut" },
     },
   };
 
   return (
-    <motion.section id="testimonial"
+    <motion.section
+      id="testimonial"
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       className="py-24 bg-white dark:bg-[#0B0F14] border-y border-gray-200 dark:border-[#1F2937]"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Title */}
-        <motion.div variants={fadeUp} className="text-center mb-16">
-          <p className="text-green-500 tracking-widest text-sm font-semibold">
-            {t("testimonials.badge")}
-          </p>
-
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#E5E7EB] mt-3">
+        <motion.div variants={fadeUp} className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             {t("testimonials.title")}
           </h2>
-
-          <p className="text-gray-600 dark:text-[#9CA3AF] mt-4 max-w-xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">
             {t("testimonials.description")}
           </p>
         </motion.div>
@@ -75,56 +73,50 @@ export default function Testimonials() {
         {/* Cards */}
         <motion.div
           variants={container}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {testimonials.map((item, i) => (
-            <motion.div
+            <motion.article
               key={i}
               variants={cardAnimation}
-              
-              className="bg-white hover:scale-[1.02] duration-300 dark:bg-[#0F172A] border border-gray-200 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition p-6"
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 24 }}
+              className="group bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 md:p-7 shadow-sm hover:shadow-2xl hover:shadow-emerald-500/10 transition flex flex-col h-full"
             >
-              {/* Stars */}
-              <motion.div
-                variants={fadeUp}
-                className="flex gap-1 text-yellow-400 mb-4"
-              >
-                {Array(5)
-                  .fill()
-                  .map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" />
-                  ))}
-              </motion.div>
+              <Quote
+                size={28}
+                className="text-emerald-500/80 mb-3 fill-emerald-500/15"
+              />
 
-              <p className="text-green-500 text-2xl mb-2">“</p>
+              <div className="flex gap-1 text-amber-400 mb-4">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <Star key={idx} size={15} fill="currentColor" />
+                ))}
+              </div>
 
-              <p className="text-gray-600 dark:text-[#9CA3AF] text-sm mb-6">
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed flex-1 mb-6">
                 {item.text}
               </p>
 
-              {/* User */}
-              <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-[#1F2937]">
-                <motion.div whileHover={{ scale: 1.1 }}>
-                  <Image
-                    src={item.avatar}
-                    width={40}
-                    height={40}
-                    alt={item.name}
-                    className="rounded-full"
-                  />
-                </motion.div>
+              <div className="flex items-center gap-3 pt-5 border-t border-gray-100 dark:border-gray-800">
+                <div
+                  className={`h-11 w-11 shrink-0 rounded-full bg-gradient-to-br ${
+                    AVATAR_COLORS[i % AVATAR_COLORS.length]
+                  } text-white font-bold text-sm flex items-center justify-center shadow-lg shadow-black/5`}
+                >
+                  {getInitials(item.name)}
+                </div>
 
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-[#E5E7EB] text-sm">
+                <div className="min-w-0">
+                  <h4 className="font-bold text-gray-900 dark:text-white text-sm truncate">
                     {item.name}
                   </h4>
-
-                  <p className="text-xs text-gray-500 dark:text-[#9CA3AF]">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                     {item.role}
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </motion.div>
       </div>

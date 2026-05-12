@@ -2,10 +2,14 @@
   "navbar": {
     "home": "Home",
     "courses": "Courses",
-    "mentor": "Team",
+    "mentor": "Teachers",
     "group": "Community",
     "testimonials": "Testimonials",
-    "pricing": "Pricing"
+    "blog": "Blog",
+    "offer": "Offer",
+    "pricing": "Pricing",
+    "getStarted": "Get Started",
+    "signIn": "Sign in"
   },
   "hero": {
     "badge": "New Courses Available",
@@ -23,7 +27,20 @@
     },
 
     "badgeCourses": "200+ Courses",
-    "badgeText": "Available Now"
+    "badgeText": "Available Now",
+
+    "cards": {
+      "ratingValue": "4.9 / 5.0",
+      "ratingLabel": "Average rating",
+      "certValue": "2,400 certificates",
+      "certLabel": "Issued this week"
+    },
+
+    "notification": {
+      "name": "Diyora R.",
+      "action": "from Andijan activated Pro plan",
+      "time": "8 minutes ago"
+    }
   },
   "buttons": {
     "start": "Start Learning",
@@ -58,6 +75,12 @@
 
     "button": "Join Community",
 
+    "stat": {
+      "value": "50K+",
+      "label": "active learners",
+      "subtext": "from 150+ countries"
+    },
+
     "badges": {
       "supportTitle": "24/7 Support",
       "supportText": "Always here",
@@ -70,7 +93,7 @@
     "title": "Explore Our Popular",
     "titleHighlight": "Courses",
     "description": "Choose from hundreds of courses designed by industry experts to help you achieve your goals.",
-    "enroll": "Explore →",
+    "enroll": "Details →",
     "viewAll": "View All Courses →",
 
     "items": [
@@ -96,84 +119,280 @@
       }
     ]
   },
+  "topStudents": {
+    "badge": "TOP STUDENTS",
+    "title": "Become one of the leading",
+    "titleHighlight": "students on our platform",
+    "description": "Our most experienced learners — those who reach the highest results, keep pushing forward and inspire others. Study, earn points and climb the leaderboard!",
+    "features": [
+      {
+        "title": "Leaderboard",
+        "text": "Boost your performance and earn a spot in the top 100 ranking of the platform."
+      },
+      {
+        "title": "Exclusive badges",
+        "text": "Earn unique digital badges for your activity and successfully completed courses."
+      },
+      {
+        "title": "Career opportunities",
+        "text": "Our top graduates are recommended to partner companies for employment."
+      },
+      {
+        "title": "Gifts & bonuses",
+        "text": "Free courses, discounts and special gifts for the best students of the month."
+      },
+      {
+        "title": "Private club",
+        "text": "Join exclusive Telegram groups and VIP lessons available only to top students."
+      },
+      {
+        "title": "Become a mentor",
+        "text": "Once experienced enough, help new learners and earn the mentor status yourself."
+      }
+    ],
+    "button": "View full leaderboard",
+    "leaderboard": {
+      "title": "Heroes of the month",
+      "totalPoints": "10,000+ points earned",
+      "pointSuffix": "pts"
+    },
+    "students": [
+      { "name": "Zarina Saidova", "points": "1450" },
+      { "name": "Asilbek To‘raev", "points": "1300" },
+      { "name": "Javohir Malikov", "points": "1200" },
+      { "name": "Malika Ergasheva", "points": "1150" },
+      { "name": "Behruz Qodirov", "points": "1100" },
+      { "name": "Sevinch Karimova", "points": "1050" },
+      { "name": "Abdulloh Normurodov", "points": "980" },
+      { "name": "Diyorbek Usmonov", "points": "920" },
+      { "name": "Nilufar Qurbonova", "points": "870" },
+      { "name": "Sardor Mirzayev", "points": "820" },
+      { "name": "Shahzod Raximov", "points": "780" },
+      { "name": "Oybek Haydarov", "points": "740" },
+      { "name": "Madina Ismoilova", "points": "700" }
+    ]
+  },
+  "teachersGrid": {
+    "badge": "TEACHERS",
+    "title": "Leading experts in their fields",
+    "description": "Every teacher on our platform is an experienced educator who has helped thousands of students achieve international results. Choose and learn directly from the best.",
+    "items": [
+      {
+        "role": "IELTS & ENGLISH",
+        "name": "Nilufar Ergasheva",
+        "specialty": "IELTS 8.0 mentor",
+        "stats": [
+          { "value": "8.0", "label": "IELTS" },
+          { "value": "500+", "label": "students" }
+        ]
+      },
+      {
+        "role": "MATH TEACHER",
+        "name": "Azizbek Rasulov",
+        "specialty": "DTM & Olympiad coach",
+        "stats": [
+          { "value": "12+", "label": "courses" },
+          { "value": "700+", "label": "students" }
+        ]
+      },
+      {
+        "role": "RUSSIAN TEACHER",
+        "name": "Madina Sobirova",
+        "specialty": "Russian A1–C1",
+        "stats": [
+          { "value": "4+", "label": "years" },
+          { "value": "300+", "label": "lessons" }
+        ]
+      },
+      {
+        "role": "IT MENTOR",
+        "name": "Javohir Aliyev",
+        "specialty": "React & Frontend",
+        "stats": [
+          { "value": "React", "label": "expert" },
+          { "value": "200+", "label": "students" }
+        ]
+      },
+      {
+        "role": "WRITING MENTOR",
+        "name": "Gulnoza Tursunova",
+        "specialty": "Academic Writing",
+        "stats": [
+          { "value": "C1+", "label": "level" },
+          { "value": "High", "label": "score" }
+        ]
+      },
+      {
+        "role": "PHYSICS TEACHER",
+        "name": "Diyorbek Karimov",
+        "specialty": "Physics & Math",
+        "stats": [
+          { "value": "6+", "label": "years" },
+          { "value": "400+", "label": "students" }
+        ]
+      },
+      {
+        "role": "BIO & CHEM",
+        "name": "Aziza Yusupova",
+        "specialty": "Biology & Chemistry",
+        "stats": [
+          { "value": "5+", "label": "years" },
+          { "value": "350+", "label": "students" }
+        ]
+      },
+      {
+        "role": "BACKEND MENTOR",
+        "name": "Bekzod Ergashev",
+        "specialty": "Python & Django",
+        "stats": [
+          { "value": "Python", "label": "stack" },
+          { "value": "180+", "label": "students" }
+        ]
+      },
+      {
+        "role": "SPEAKING COACH",
+        "name": "Nodira Tursunova",
+        "specialty": "Speaking & Pronunciation",
+        "stats": [
+          { "value": "C2", "label": "level" },
+          { "value": "600+", "label": "students" }
+        ]
+      },
+      {
+        "role": "DTM PREP",
+        "name": "Sherzod Mamatov",
+        "specialty": "History & Social sciences",
+        "stats": [
+          { "value": "7+", "label": "years" },
+          { "value": "900+", "label": "students" }
+        ]
+      }
+    ]
+  },
   "mentors": {
     "badge": "TEAM",
-    "title": "The idea and team",
+    "title": "The minds",
     "titleHighlight": "behind Bilimgoh",
-    "description": "The Bilimgoh platform was created by a team that brings together education, business, and technology.",
+    "description": "Built by an experienced team combining education, business and technology.",
 
     "items": [
       {
         "name": "Abdulloh Rahmatullayev",
-        "role": "CEO & Co-Founder",
-        "bio": "Founder of education and various business projects. He works on developing modern education systems and building platforms that deliver real results for young people.",
+        "role": "CEO & CO-FOUNDER",
+        "bio": "Founder of education and business projects. He works on developing modern education systems and building platforms for real results.",
         "primaryValue": "5+",
-        "primaryLabel": "years of experience",
-        "secondaryValue": "10,000+",
-        "secondaryLabel": "students mentored"
+        "primaryLabel": "years exp.",
+        "secondaryValue": "10K+",
+        "secondaryLabel": "students"
       },
       {
         "name": "Kaxxarov Akmaljon",
-        "role": "Co-Founder & Investor",
-        "bio": "Entrepreneur and patron. He contributes to the platform’s growth by supporting education projects and investing in youth development.",
-        "primaryValue": "Multiple",
-        "primaryLabel": "project investor",
+        "role": "CO-FOUNDER & INVESTOR",
+        "bio": "Entrepreneur and patron. Contributes to the platform's growth by supporting education projects and investing in youth development.",
+        "primaryValue": "20+",
+        "primaryLabel": "projects",
         "secondaryValue": "Active",
-        "secondaryLabel": "in social initiatives"
+        "secondaryLabel": "investor"
       },
       {
         "name": "Najmiddin",
-        "role": "CTO & Co-Founder",
-        "bio": "IT specialist. He ensures the platform’s technical architecture, functionality, and stability. He works on all technological solutions behind Bilimgoh.",
-        "primaryValue": "Full-stack",
-        "primaryLabel": "developer",
-        "secondaryValue": "Backend/Frontend",
-        "secondaryLabel": "management"
+        "role": "CIO & CO-FOUNDER",
+        "bio": "IT specialist ensuring the platform's technical architecture, functionality and stable operation.",
+        "primaryValue": "7+",
+        "primaryLabel": "years",
+        "secondaryValue": "Full",
+        "secondaryLabel": "stack"
+      },
+      {
+        "name": "Shaxriyor Karimov",
+        "role": "MARKETING LEAD",
+        "bio": "Develops the Bilimgoh brand, advertising strategy and communication with users.",
+        "primaryValue": "50+",
+        "primaryLabel": "campaigns",
+        "secondaryValue": "50K+",
+        "secondaryLabel": "audience"
+      },
+      {
+        "name": "Sevinch Ibrohimova",
+        "role": "COMMUNITY LEAD",
+        "bio": "Responsible for community engagement and improving user experience. In constant contact with students.",
+        "primaryValue": "20+",
+        "primaryLabel": "community",
+        "secondaryValue": "24/7",
+        "secondaryLabel": "support"
       }
     ]
   },
   "testimonials": {
     "badge": "TESTIMONIALS",
-    "title": "What Our Students Say",
-    "description": "Join thousands of successful students who have transformed their careers with LearnHub.",
+    "title": "What our students say",
+    "description": "Join thousands of successful students who have transformed their careers with Bilimgoh.",
     "items": [
       {
-        "name": "Alex Thompson",
-        "role": "Software Developer at Meta",
-        "avatar": "/assets/avatars/testimonial-1.jpg",
-        "text": "LearnHub completely transformed my career. The web development bootcamp gave me the skills I needed to land my dream job at Meta. The mentors are incredible!"
+        "name": "Madina Karimova",
+        "role": "Westminster Tashkent student",
+        "text": "Bilimgoh's English course completely changed everything for me. I scored 8.0 on IELTS and got admitted to Westminster Tashkent. The mentors are truly passionate about teaching."
       },
       {
-        "name": "Jessica Lee",
-        "role": "UX Designer at Spotify",
-        "avatar": "/assets/avatars/testimonial-2.jpg",
-        "text": "The UI/UX design course was exactly what I needed. The practical projects and mentor feedback helped me build a portfolio that got me hired at Spotify."
+        "name": "Sardor Yo‘ldoshev",
+        "role": "Frontend developer at EPAM",
+        "text": "The frontend course was exactly what I needed. Hands-on projects and mentor feedback helped me build a strong portfolio. Now I work at EPAM."
       },
       {
-        "name": "David Park",
-        "role": "Data Analyst at Amazon",
-        "avatar": "/assets/avatars/testimonial-3.jpg",
-        "text": "I switched careers from marketing to data science thanks to LearnHub. The structured curriculum and supportive community made the transition seamless."
+        "name": "Diyora Toshmatova",
+        "role": "NYU Abu Dhabi student",
+        "text": "Thanks to Bilimgoh I scored 1480 on the SAT. Structured lessons and the community helped tremendously. I got into a US university on a scholarship."
       },
       {
-        "name": "Maria Garcia",
-        "role": "Freelance Designer",
-        "avatar": "/assets/avatars/testimonial-4.jpg",
-        "text": "As a freelancer, I needed flexible learning. LearnHub's self-paced courses fit perfectly into my schedule. Highly recommend!"
+        "name": "Jasur Rahmatov",
+        "role": "TIIT 1st-year student",
+        "text": "Together with my mother I completed the DTM prep course. I scored 9.0/10.0 in math and got into TIIT with a state grant. Thanks to mentor Akbar aka!"
       },
       {
-        "name": "James Wilson",
-        "role": "Startup Founder",
-        "avatar": "/assets/avatars/testimonial-5.jpg",
-        "text": "The marketing course helped me understand how to grow my startup. The ROI has been incredible — best investment in my education."
+        "name": "Feruza Abdullayeva",
+        "role": "UX Designer at Uzum Market",
+        "text": "I finished the UX design course and now I work at Uzum. Sevinch opa is an amazing mentor — she gave personal feedback on every project."
       },
       {
-        "name": "Emily Chen",
-        "role": "Product Manager at Google",
-        "avatar": "/assets/avatars/testimonial-6.jpg",
-        "text": "The combination of technical and business courses gave me a unique edge. I've recommended LearnHub to all my colleagues."
+        "name": "Bekzod Tursunov",
+        "role": "Startup founder",
+        "text": "The marketing course helped me grow my startup. It was the best investment in my education — I'm planning new projects right now."
       }
     ]
+  },
+  "blog": {
+    "badge": "BLOG",
+    "title": "Latest articles",
+    "description": "Articles on education, IELTS, DTM, IT and career — written by our experienced mentors.",
+    "viewAll": "View all articles",
+    "items": [
+      {
+        "category": "IELTS",
+        "title": "A 90-day plan to score 7.0+ on IELTS",
+        "author": "Nilufar Ergasheva",
+        "date": "Dec 12, 2025"
+      },
+      {
+        "category": "IT & DEV",
+        "title": "Becoming a Frontend developer in 2026: full roadmap",
+        "author": "Javohir Aliyev",
+        "date": "Dec 10, 2025"
+      },
+      {
+        "category": "DTM",
+        "title": "DTM 2026 — new exam format: what you need to know",
+        "author": "Sherzod Mamatov",
+        "date": "Dec 8, 2025"
+      }
+    ]
+  },
+  "cta": {
+    "titleStart": "Start learning",
+    "titleAccent": "today",
+    "titleEnd": "",
+    "description": "Join 50,000+ students and transform your career. The first week is completely free.",
+    "primary": "Start for free",
+    "secondary": "View pricing"
   },
   "footer": {
     "description": "Empowering millions of learners worldwide with industry-leading courses and expert mentors.",

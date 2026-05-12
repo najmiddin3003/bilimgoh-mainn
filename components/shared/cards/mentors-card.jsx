@@ -1,114 +1,76 @@
 "use client";
 
-import Image from "next/image";
-import { Star, Twitter, Linkedin, Github } from "lucide-react";
+import { Send, Linkedin, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+
+const MENTOR_VISUALS = [
+  { color: "from-emerald-400 to-teal-500" },
+  { color: "from-violet-500 to-purple-500" },
+  { color: "from-orange-500 to-red-500" },
+  { color: "from-sky-500 to-blue-500" },
+  { color: "from-fuchsia-500 to-purple-500" },
+];
+
+const getInitials = (name = "") =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
 
 export default function Mentors() {
   const { t } = useTranslation();
 
-  const mentors = [
-    {
-      id: 1,
-      name: t("mentors.items.0.name"),
-      role: t("mentors.items.0.role"),
-      image: "/assets/avatars/mentor-avatar-1-1.jpg",
-      bio: t("mentors.items.0.bio"),
-      primaryValue: t("mentors.items.0.primaryValue"),
-      primaryLabel: t("mentors.items.0.primaryLabel"),
-      secondaryValue: t("mentors.items.0.secondaryValue"),
-      secondaryLabel: t("mentors.items.0.secondaryLabel"),
-    },
-    {
-      id: 2,
-      name: t("mentors.items.1.name"),
-      role: t("mentors.items.1.role"),
-      image: "/assets/avatars/mentor-avatar-2.jpg",
-      bio: t("mentors.items.1.bio"),
-      primaryValue: t("mentors.items.1.primaryValue"),
-      primaryLabel: t("mentors.items.1.primaryLabel"),
-      secondaryValue: t("mentors.items.1.secondaryValue"),
-      secondaryLabel: t("mentors.items.1.secondaryLabel"),
-    },
-    {
-      id: 3,
-      name: t("mentors.items.2.name"),
-      role: t("mentors.items.2.role"),
-      image: "/assets/avatars/760A6318.png",
-      bio: t("mentors.items.2.bio"),
-      primaryValue: t("mentors.items.2.primaryValue"),
-      primaryLabel: t("mentors.items.2.primaryLabel"),
-      secondaryValue: t("mentors.items.2.secondaryValue"),
-      secondaryLabel: t("mentors.items.2.secondaryLabel"),
-    },
-  ];
+  const rawItems = t("mentors.items", { returnObjects: true });
+  const mentors = Array.isArray(rawItems) ? rawItems : [];
 
   const container = {
     hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.18,
-      },
-    },
+    show: { transition: { staggerChildren: 0.12 } },
   };
 
   const fadeUp = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   const cardAnimation = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.95,
-    },
+    hidden: { opacity: 0, y: 40, scale: 0.96 },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.55, ease: "easeOut" },
     },
   };
 
   return (
-    <motion.section id="mentors"
+    <motion.section
+      id="mentors"
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       className="py-20 bg-white dark:bg-[#0B0F14] border-y border-gray-200 dark:border-[#1F2937]"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Title */}
-        <motion.div variants={fadeUp} className="text-center mb-16">
-          <p className="text-green-500 tracking-widest text-sm font-semibold">
+        <motion.div variants={fadeUp} className="text-center mb-14">
+          <p className="text-green-500 tracking-[0.25em] text-xs font-bold uppercase">
             {t("mentors.badge")}
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#E5E7EB] mt-3">
-            {t("mentors.title")}
-            <span className="text-green-500">
-              {" "}
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mt-3 tracking-tight">
+            {t("mentors.title")}{" "}
+            <span className="text-emerald-500">
               {t("mentors.titleHighlight")}
             </span>
           </h2>
 
-          <p className="text-gray-600 dark:text-[#9CA3AF] mt-4 max-w-xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-xl mx-auto">
             {t("mentors.description")}
           </p>
         </motion.div>
@@ -116,91 +78,140 @@ export default function Mentors() {
         {/* Cards */}
         <motion.div
           variants={container}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6"
         >
-          {mentors.map((mentor) => (
-            <motion.div
-              key={mentor.id}
-              variants={cardAnimation}
+          {mentors.map((mentor, idx) => {
+            const visual = MENTOR_VISUALS[idx % MENTOR_VISUALS.length];
+            const isDark = idx === 0;
 
-              className="group hover:scale-[1.02] bg-white dark:bg-[#0F172A] border border-slate-300 dark:border-[#1F2937] rounded-2xl shadow-md dark:shadow-black/40 hover:shadow-xl transition duration-300 p-6 text-center"
-            >
-              {/* Avatar */}
-              <motion.div
-  whileHover={{ scale: 1.08 }}
-  transition={{ duration: 0.3 }}
-  className="relative w-32 h-32 mx-auto mb-6 group"
->
-  {/* Glow (faqat hoverda kuchayadi) */}
-  <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl opacity-40 group-hover:opacity-100 transition duration-500"></div>
+            return (
+              <motion.article
+                key={`${mentor.name}-${idx}`}
+                variants={cardAnimation}
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                className={`lg:col-span-2 rounded-2xl p-6 text-center transition shadow-sm hover:shadow-2xl flex flex-col ${
+                  isDark
+                    ? "bg-[#0B1220] text-white border border-[#0B1220] hover:shadow-emerald-500/20"
+                    : "bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-gray-800 hover:shadow-emerald-500/10"
+                }`}
+              >
+                {/* Avatar */}
+                <div className="relative w-24 h-24 mx-auto mb-5">
+                  <div
+                    className={`absolute inset-0 rounded-full bg-gradient-to-br ${visual.color} opacity-25 blur-xl`}
+                  />
+                  <div
+                    className={`relative h-full w-full rounded-full bg-gradient-to-br ${visual.color} flex items-center justify-center text-white text-2xl font-extrabold shadow-lg shadow-black/10`}
+                  >
+                    {getInitials(mentor.name)}
+                  </div>
+                </div>
 
-  {/* Gradient border DOIM KO‘RINADI */}
-  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-green-400 via-emerald-500 to-green-600 p-[3px]">
-    
-    {/* Inner container */}
-    <div className="w-full h-full rounded-full bg-background overflow-hidden">
-      
-      {/* Image */}
-      <motion.div
-        whileHover={{ rotate: 6, scale: 1.1 }}
-        transition={{ duration: 0.3 }}
-        className="w-full h-full"
-      >
-        <Image
-          src={mentor.image}
-          alt={mentor.name}
-          fill
-          className="object-cover rounded-full border-green-500 border-4"
-        />
-      </motion.div>
+                {/* Role badge */}
+                <p
+                  className={`text-[10px] font-bold tracking-[0.18em] uppercase mb-2 ${
+                    isDark ? "text-emerald-400" : "text-emerald-500"
+                  }`}
+                >
+                  {mentor.role}
+                </p>
 
-    </div>
-  </div>
-</motion.div>
+                {/* Name */}
+                <h3
+                  className={`text-lg font-bold mb-2 ${
+                    isDark ? "text-white" : "text-gray-900 dark:text-white"
+                  }`}
+                >
+                  {mentor.name}
+                </h3>
 
-              {/* Info */}
-              <h3 className="font-semibold text-lg text-gray-900 dark:text-[#E5E7EB]">
-                {mentor.name}
-              </h3>
+                {/* Bio */}
+                <p
+                  className={`text-xs leading-relaxed mb-5 flex-1 ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-600 dark:text-gray-400"
+                  }`}
+                >
+                  {mentor.bio}
+                </p>
 
-              <p className="text-sm text-gray-500 dark:text-[#9CA3AF] mb-3">
-                {mentor.role}
-              </p>
+                {/* Stats */}
+                <div
+                  className={`flex items-center justify-around gap-2 mb-5 pt-4 border-t ${
+                    isDark
+                      ? "border-white/10"
+                      : "border-gray-100 dark:border-gray-800"
+                  }`}
+                >
+                  <div className="flex flex-col">
+                    <span className="text-base font-extrabold text-emerald-500">
+                      {mentor.primaryValue}
+                    </span>
+                    <span
+                      className={`text-[10px] ${
+                        isDark
+                          ? "text-gray-400"
+                          : "text-gray-500 dark:text-gray-400"
+                      }`}
+                    >
+                      {mentor.primaryLabel}
+                    </span>
+                  </div>
 
-              <p className="text-sm text-gray-600 dark:text-[#9CA3AF] mb-5">
-                {mentor.bio}
-              </p>
+                  <div
+                    className={`w-px h-8 ${
+                      isDark ? "bg-white/10" : "bg-gray-200 dark:bg-gray-800"
+                    }`}
+                  />
 
-              {/* Stats */}
-              <div className="flex justify-center gap-6 text-sm text-gray-700 dark:text-[#9CA3AF] mb-5">
-                <span>
-                  <b>{mentor.primaryValue}</b> {mentor.primaryLabel}
-                </span>
+                  <div className="flex flex-col">
+                    <span className="text-base font-extrabold text-emerald-500">
+                      {mentor.secondaryValue}
+                    </span>
+                    <span
+                      className={`text-[10px] ${
+                        isDark
+                          ? "text-gray-400"
+                          : "text-gray-500 dark:text-gray-400"
+                      }`}
+                    >
+                      {mentor.secondaryLabel}
+                    </span>
+                  </div>
+                </div>
 
-                <span>
-                  <b>{mentor.secondaryValue}</b> {mentor.secondaryLabel}
-                </span>
-              </div>
-
-              {/* Social */}
-              <div className="flex justify-center gap-3 text-gray-500 dark:text-[#9CA3AF]">
-                <Twitter
-                  size={18}
-                  className="hover:text-green-500 cursor-pointer transition"
-                />
-
-                <Linkedin
-                  size={18}
-                  className="hover:text-green-500 cursor-pointer transition"
-                />
-
-                <Github
-                  size={18}
-                  className="hover:text-green-500 cursor-pointer transition"
-                />
-              </div>
-            </motion.div>
-          ))}
+                {/* Social */}
+                <div
+                  className={`flex justify-center gap-4 ${
+                    isDark
+                      ? "text-gray-500"
+                      : "text-gray-400 dark:text-gray-500"
+                  }`}
+                >
+                  <a
+                    href="#"
+                    className="transition hover:-translate-y-0.5 hover:text-emerald-500"
+                  >
+                    <Send size={16} />
+                  </a>
+                  <a
+                    href="#"
+                    className="transition hover:-translate-y-0.5 hover:text-emerald-500"
+                  >
+                    <Instagram size={16} />
+                  </a>
+                  <a
+                    href="#"
+                    className="transition hover:-translate-y-0.5 hover:text-emerald-500"
+                  >
+                    <Linkedin size={16} />
+                  </a>
+                </div>
+              </motion.article>
+            );
+          })}
         </motion.div>
       </div>
     </motion.section>

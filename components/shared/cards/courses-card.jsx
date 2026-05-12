@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Clock, Users, Star } from "lucide-react";
+import { Clock, Users, Star, ArrowRight, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
@@ -20,26 +20,17 @@ export default function Courses({ simpleMode = false, forcedCategory = null }) {
     "Bolalar kurslari",
   ];
 
-  // 🔹 ACTIVE CATEGORY
   const [activeCategory, setActiveCategory] = useState("Til kurslari");
   const { t } = useTranslation();
 
   const fadeUp = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-    },
+    hidden: { opacity: 0, y: 50 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.7, ease: "easeOut" },
     },
   };
-
-  // 🔹 COURSES DATA
 
   const hasForcedCategory = Boolean(forcedCategory);
   const filteredCourses = hasForcedCategory
@@ -52,120 +43,192 @@ export default function Courses({ simpleMode = false, forcedCategory = null }) {
         ? courses
         : courses.filter((c) => c.category === activeCategory);
 
+  const getInitials = (name = "") =>
+    name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase();
+
+  const isTop = (course) => parseFloat(course.rating) >= 5.0;
+
   return (
-    <section className={simpleMode ? "bg-white" : "py-20 bg-white dark:bg-[#0B0F14]"}>
-      <section className="courses-section">
-        <div className={simpleMode ? "mx-auto w-full" : "max-w-7xl mx-auto px-6"}>
-          {!simpleMode && (
-            <motion.div variants={fadeUp} className="text-center mb-14">
-              <p className="text-green-500 font-semibold tracking-widest text-sm">
-                {t("courses.badge")}
-              </p>
+    <section
+      id="courses"
+      className={simpleMode ? "bg-white" : "py-20 bg-white dark:bg-[#0B0F14]"}
+    >
+      <div className={simpleMode ? "mx-auto w-full" : "max-w-7xl mx-auto px-6"}>
+        {!simpleMode && (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-center mb-12"
+          >
+            <p className="text-green-500 font-semibold tracking-[0.3em] text-xs uppercase">
+              {t("courses.badge")}
+            </p>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#E5E7EB] mt-3">
-                {t("courses.title")}{" "}
-                <span className="text-green-500">
-                  {t("courses.titleHighlight")}
-                </span>
-              </h2>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mt-3 tracking-tight">
+              {t("courses.title")}{" "}
+              <span className="text-gray-900 dark:text-white">
+                {t("courses.titleHighlight")}
+              </span>
+            </h2>
 
-              <p className="text-gray-600 dark:text-[#9CA3AF] max-w-xl mx-auto mt-4">
-                {t("courses.description")}
-              </p>
-            </motion.div>
-          )}
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto mt-4">
+              {t("courses.description")}
+            </p>
+          </motion.div>
+        )}
 
-          {!simpleMode && !hasForcedCategory && (
-            <div className="flex justify-center mb-12">
-              <div className="flex gap-2 w-full bg-gray-100 dark:bg-[#111827] p-2 rounded-full">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-5 py-2 w-full rounded-full text-[12px] transition ${
-                      activeCategory === cat
-                        ? "bg-green-500 text-white"
-                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#1F2937]"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className={`${simpleMode ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"}`}>
-            {filteredCourses.map((course) => (
-              <Link key={course.id} href={`/courses/${course.id}`}>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white dark:bg-[#0F172A] border rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
+        {!simpleMode && !hasForcedCategory && (
+          <div className="flex justify-center flex-wrap gap-2 mb-12">
+            {categories.map((cat) => {
+              const active = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition border ${
+                    active
+                      ? "bg-gray-900 text-white border-gray-900 shadow-md dark:bg-white dark:text-gray-900 dark:border-white"
+                      : "bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50 dark:bg-[#0F172A] dark:text-gray-300 dark:border-gray-800 dark:hover:border-gray-700"
+                  }`}
                 >
-                  {/* IMAGE */}
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        <div
+          className={`${
+            simpleMode
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              : "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          }`}
+        >
+          {filteredCourses.map((course) => (
+            <Link key={course.id} href={`/courses/${course.id}`}>
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                className="group bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-black/40 transition overflow-hidden h-full flex flex-col"
+              >
+                {/* IMAGE with overlays */}
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src={course.image}
                     width={400}
                     height={250}
                     alt={course.title}
-                    className="w-full h-52 object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 
-                  {/* CONTENT */}
-                  <div className="p-5">
-                    <h3 className="font-semibold mb-2">{course.title}</h3>
+                  {/* Green tinted gradient for legibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 via-emerald-700/10 to-emerald-500/10 mix-blend-multiply" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-green-500/30 via-transparent to-transparent" />
 
-                    <p className="text-sm text-gray-500 mb-3">
-                      {course.instructor}
-                    </p>
-
-                    {/* STATS */}
-                    <div className="flex justify-between text-sm text-gray-500 mb-4">
-                      <div className="flex items-center gap-1">
-                        <Clock size={14} />
-                        {course.duration}
-                      </div>
-
-                      <div className="flex items-center gap-1">
-                        <Users size={14} />
-                        {course.students}
-                      </div>
-
-                      <div className="flex items-center gap-1 text-yellow-400">
-                        <Star size={14} fill="currentColor" />
-                        {course.rating}
-                      </div>
-                    </div>
-
-                    {/* PRICE */}
-                    <div className="flex justify-between items-center">
-                      <span className="font-bold">{course.price}</span>
-
-                      <button className="text-green-500 hover:text-green-400">
-                        Batafsil
-                      </button>
-                    </div>
+                  {/* Top badge */}
+                  <div className="absolute top-3 left-3">
+                    {isTop(course) ? (
+                      <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur text-gray-900 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow">
+                        <Flame size={11} className="text-orange-500" />
+                        TOP
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center bg-white/95 backdrop-blur text-gray-900 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow">
+                        {course.category.split(" ")[0]}
+                      </span>
+                    )}
                   </div>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
 
-          {!simpleMode && (
-            <motion.div variants={fadeUp} className="flex justify-center mt-14">
-              <button className="border border-gray-300 dark:border-[#1F2937] px-6 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-[#111827] dark:text-[#E5E7EB] transition">
-                {t("courses.viewAll")}
-              </button>
-            </motion.div>
-          )}
+                  {/* Rating bottom-left */}
+                  <div className="absolute bottom-3 left-3">
+                    <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur text-gray-900 px-2.5 py-1 rounded-full text-xs font-bold shadow">
+                      <Star size={12} className="fill-amber-400 text-amber-400" />
+                      {course.rating}
+                    </span>
+                  </div>
+                </div>
 
-          {!simpleMode && filteredCourses.length === 0 && (
-            <p className="text-center mt-10 text-gray-500">
-              Bu kategoriyada kurslar mavjud emas
-            </p>
-          )}
+                {/* Content */}
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-3 leading-snug line-clamp-2 min-h-[3rem]">
+                    {course.title}
+                  </h3>
+
+                  {/* Instructor */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="h-6 w-6 shrink-0 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 text-white text-[10px] flex items-center justify-center font-bold">
+                      {getInitials(course.instructor)}
+                    </span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                      {course.instructor}
+                    </span>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pb-4 mb-4 border-b border-gray-100 dark:border-gray-800">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock size={13} />
+                      {course.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Users size={13} />
+                      {course.students}
+                    </span>
+                  </div>
+
+                  {/* Price + Batafsil */}
+                  <div className="mt-auto flex items-center justify-between">
+                    <span className="font-extrabold text-gray-900 dark:text-white text-base">
+                      {course.price}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-green-500 group-hover:text-green-600 text-sm font-semibold transition">
+                      {t("courses.enroll")?.replace("→", "").trim() || "Batafsil"}
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform group-hover:translate-x-0.5"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
         </div>
-      </section>
+
+        {!simpleMode && (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="flex justify-center mt-12"
+          >
+            <button className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 font-medium transition group">
+              {t("courses.viewAll")?.replace("→", "").trim() ||
+                "Barcha kurslarni ko'rish"}
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </button>
+          </motion.div>
+        )}
+
+        {!simpleMode && filteredCourses.length === 0 && (
+          <p className="text-center mt-10 text-gray-500">
+            Bu kategoriyada kurslar mavjud emas
+          </p>
+        )}
+      </div>
     </section>
   );
 }

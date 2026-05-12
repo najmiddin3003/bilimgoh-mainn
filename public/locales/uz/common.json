@@ -2,11 +2,14 @@
   "navbar": {
     "home": "Bosh sahifa",
     "courses": "Kurslar",
-    "mentor": "Jamoa",
+    "mentor": "Ustozlar",
     "group": "Hamjamiyat",
     "testimonials": "Fikrlar",
+    "blog": "Blog",
+    "offer": "Taklif",
     "pricing": "Narxlar",
-    "getStarted": "Boshlash"
+    "getStarted": "Boshlash",
+    "signIn": "Kirish"
   },
   "hero": {
   "badge": "Yangi kurslar mavjud",
@@ -24,7 +27,20 @@
   },
 
   "badgeCourses": "200+ Kurs",
-  "badgeText": "Hozir mavjud"
+  "badgeText": "Hozir mavjud",
+
+  "cards": {
+    "ratingValue": "4.9 / 5.0",
+    "ratingLabel": "O‘rtacha reyting",
+    "certValue": "2 400 sertifikat",
+    "certLabel": "Bu hafta berildi"
+  },
+
+  "notification": {
+    "name": "Diyora R.",
+    "action": "Andijondan Pro tarifni faollashtirdi",
+    "time": "8 daqiqa oldin"
+  }
 },
   "buttons": {
     "start": "Boshlash",
@@ -59,6 +75,12 @@
 
     "button": "Hamjamiyatga qo‘shilish",
 
+    "stat": {
+      "value": "50K+",
+      "label": "faol o‘quvchi",
+      "subtext": "150+ davlatdan"
+    },
+
     "badges": {
       "supportTitle": "24/7 yordam",
       "supportText": "Doimo yordam beramiz",
@@ -71,7 +93,7 @@
     "title": "Bizning mashhur",
     "titleHighlight": "kurslarimiz",
     "description": "Maqsadlaringizga erishishga yordam beradigan mutaxassislar tomonidan yaratilgan yuzlab kurslardan tanlang.",
-    "enroll": "Tanishish →",
+    "enroll": "Batafsil →",
     "viewAll": "Barcha kurslarni ko‘rish →",
 
     "items": [
@@ -97,84 +119,280 @@
       }
     ]
   },
+  "topStudents": {
+    "badge": "TOP O‘QUVCHILAR",
+    "title": "Platformamizning peshqadam",
+    "titleHighlight": "o‘quvchilari qatoridan joy oling",
+    "description": "Bilimgoh platformasida eng yuqori natijalarni qayd etgan, tinimsiz izlanishda bo‘lgan va boshqalarga o‘rnak bo‘layotgan tajribali talabalarimiz. Bilim oling, ballar to‘plang va reytingda yuqoriga ko‘tariling!",
+    "features": [
+      {
+        "title": "Liderlar doskasi",
+        "text": "O‘z imkoniyatlaringizni oshiring va platformaning eng kuchli 100 talik reytingidan joy oling."
+      },
+      {
+        "title": "Maxsus nishonlar",
+        "text": "Faolligingiz va muvaffaqiyatli tugatilgan kurslar uchun eksklyuziv raqamli nishonlarni qo‘lga kiriting."
+      },
+      {
+        "title": "Karyera imkoniyatlari",
+        "text": "Eng yaxshi natija ko‘rsatgan bitiruvchilarimiz hamkor kompaniyalarga ishga tavsiya etiladi."
+      },
+      {
+        "title": "Sovg‘alar va bonuslar",
+        "text": "Oyning eng yaxshi o‘quvchilari uchun bepul kurslar, chegirmalar va maxsus sovg‘alar."
+      },
+      {
+        "title": "Yopiq klub",
+        "text": "Faqatgina top o‘quvchilar uchun mo‘ljallangan yopiq Telegram guruhlari va VIP darslarga qo‘shiling."
+      },
+      {
+        "title": "Mentorlik imkoniyati",
+        "text": "Yuqori tajribaga ega bo‘lgach, yangi o‘quvchilarga yordam bering va mentor maqomini oling."
+      }
+    ],
+    "button": "To‘liq reytingni ko‘rish",
+    "leaderboard": {
+      "title": "Oy qahramonlari",
+      "totalPoints": "10 000+ to‘plangan ballar",
+      "pointSuffix": "ball"
+    },
+    "students": [
+      { "name": "Zarina Saidova", "points": "1450" },
+      { "name": "Asilbek To‘raev", "points": "1300" },
+      { "name": "Javohir Malikov", "points": "1200" },
+      { "name": "Malika Ergasheva", "points": "1150" },
+      { "name": "Behruz Qodirov", "points": "1100" },
+      { "name": "Sevinch Karimova", "points": "1050" },
+      { "name": "Abdulloh Normurodov", "points": "980" },
+      { "name": "Diyorbek Usmonov", "points": "920" },
+      { "name": "Nilufar Qurbonova", "points": "870" },
+      { "name": "Sardor Mirzayev", "points": "820" },
+      { "name": "Shahzod Raximov", "points": "780" },
+      { "name": "Oybek Haydarov", "points": "740" },
+      { "name": "Madina Ismoilova", "points": "700" }
+    ]
+  },
+  "teachersGrid": {
+    "badge": "USTOZLAR",
+    "title": "O‘z sohasining peshqadam mutaxassislari",
+    "description": "Har bir ustozimiz minglab shogirdlarni xalqaro natijalarga olib chiqqan tajribali pedagog. Tanlang va to‘g‘ridan-to‘g‘ri o‘rganing.",
+    "items": [
+      {
+        "role": "IELTS & ENGLISH",
+        "name": "Nilufar Ergasheva",
+        "specialty": "IELTS 8.0 mentori",
+        "stats": [
+          { "value": "8.0", "label": "IELTS" },
+          { "value": "500+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "MATH TEACHER",
+        "name": "Azizbek Rasulov",
+        "specialty": "DTM va olimpiada ustozi",
+        "stats": [
+          { "value": "12+", "label": "kurs" },
+          { "value": "700+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "RUSSIAN TEACHER",
+        "name": "Madina Sobirova",
+        "specialty": "Rus tili A1–C1",
+        "stats": [
+          { "value": "4+", "label": "yil" },
+          { "value": "300+", "label": "dars" }
+        ]
+      },
+      {
+        "role": "IT MENTOR",
+        "name": "Javohir Aliyev",
+        "specialty": "React & Frontend",
+        "stats": [
+          { "value": "React", "label": "ustuni" },
+          { "value": "200+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "WRITING MENTOR",
+        "name": "Gulnoza Tursunova",
+        "specialty": "Academic Writing",
+        "stats": [
+          { "value": "C1+", "label": "daraja" },
+          { "value": "High", "label": "natija" }
+        ]
+      },
+      {
+        "role": "PHYSICS TEACHER",
+        "name": "Diyorbek Karimov",
+        "specialty": "Fizika va matematika",
+        "stats": [
+          { "value": "6+", "label": "yil" },
+          { "value": "400+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "BIO & CHEM",
+        "name": "Aziza Yusupova",
+        "specialty": "Biologiya va kimyo",
+        "stats": [
+          { "value": "5+", "label": "yil" },
+          { "value": "350+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "BACKEND MENTOR",
+        "name": "Bekzod Ergashev",
+        "specialty": "Python & Django",
+        "stats": [
+          { "value": "Python", "label": "stack" },
+          { "value": "180+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "SPEAKING COACH",
+        "name": "Nodira Tursunova",
+        "specialty": "Speaking & Pronunciation",
+        "stats": [
+          { "value": "C2", "label": "daraja" },
+          { "value": "600+", "label": "shogird" }
+        ]
+      },
+      {
+        "role": "DTM TAYYORLOV",
+        "name": "Sherzod Mamatov",
+        "specialty": "Tarix va ijtimoiy fanlar",
+        "stats": [
+          { "value": "7+", "label": "yil" },
+          { "value": "900+", "label": "shogird" }
+        ]
+      }
+    ]
+  },
   "mentors": {
     "badge": "JAMOA",
     "title": "Bilimgoh ortidagi",
-    "titleHighlight": "g‘oya va jamoa",
-    "description": "Bilimgoh platformasi ta’lim, biznes va texnologiyani birlashtirgan jamoa tomonidan yaratilgan.",
+    "titleHighlight": "g‘oya egalari",
+    "description": "Ta’lim, biznes va texnologiyani birlashtirgan tajribali jamoa tomonidan yaratilgan.",
 
     "items": [
       {
         "name": "Abdulloh Rahmatullayev",
-        "role": "CEO & Co-Founder",
-        "bio": "Ta’lim va turli biznes loyihalar asoschisi. Zamonaviy ta’lim tizimini rivojlantirish va yoshlar uchun real natija beradigan platformalar yaratish ustida ishlaydi.",
+        "role": "CEO & CO-FOUNDER",
+        "bio": "Ta’lim va turli biznes loyihalar asoschisi. Zamonaviy ta’lim tizimini rivojlantirish va platformalar yaratish ustida ishlaydi.",
         "primaryValue": "5+",
         "primaryLabel": "yil tajriba",
-        "secondaryValue": "10,000+",
-        "secondaryLabel": "o‘quvchi bilan ishlagan"
+        "secondaryValue": "10K+",
+        "secondaryLabel": "o‘quvchi"
       },
       {
         "name": "Kaxxarov Akmaljon",
-        "role": "Co-Founder & Investor",
-        "bio": "Tadbirkor va metsenat. Ta’lim loyihalarini qo‘llab-quvvatlash va yoshlar rivoji uchun investitsiya qilish orqali platformaning o‘sishiga hissa qo‘shadi.",
-        "primaryValue": "Ko‘plab",
-        "primaryLabel": "loyihalar investori",
+        "role": "CO-FOUNDER & INVESTOR",
+        "bio": "Tadbirkor va metsenat. Ta’lim loyihalarini qo‘llab-quvvatlash va yoshlar rivoji uchun investitsiya orqali platforma o‘sishiga hissa qo‘shadi.",
+        "primaryValue": "20+",
+        "primaryLabel": "loyiha",
         "secondaryValue": "Faol",
-        "secondaryLabel": "ijtimoiy loyihalarda"
+        "secondaryLabel": "investor"
       },
       {
         "name": "Najmiddin",
-        "role": "CTO & Co-Founder",
-        "bio": "IT mutaxassis. Platformaning texnik arxitekturasi, funksionalligi va barqaror ishlashini ta’minlaydi. Bilimgoh’ning barcha texnologik yechimlari ustida ishlaydi.",
-        "primaryValue": "Full-stack",
-        "primaryLabel": "developer",
-        "secondaryValue": "Backend/Frontend",
-        "secondaryLabel": "boshqaruvi"
+        "role": "CIO & CO-FOUNDER",
+        "bio": "IT mutaxassis. Platformaning texnik arxitekturasi, funksionalligi va barqaror ishlashini ta’minlaydi.",
+        "primaryValue": "7+",
+        "primaryLabel": "yil",
+        "secondaryValue": "Full",
+        "secondaryLabel": "stack"
+      },
+      {
+        "name": "Shaxriyor Karimov",
+        "role": "MARKETING LEAD",
+        "bio": "Bilimgoh brendini rivojlantirish, reklama strategiyasi va foydalanuvchilar bilan aloqani boshqaradi.",
+        "primaryValue": "50+",
+        "primaryLabel": "kampaniya",
+        "secondaryValue": "50K+",
+        "secondaryLabel": "auditoriya"
+      },
+      {
+        "name": "Sevinch Ibrohimova",
+        "role": "COMMUNITY LEAD",
+        "bio": "Hamjamiyat bilan ishlash va foydalanuvchi tajribasini yaxshilash bo‘yicha mas’ul. Talabalar bilan doimiy aloqada bo‘ladi.",
+        "primaryValue": "20+",
+        "primaryLabel": "hamjamiyat",
+        "secondaryValue": "24/7",
+        "secondaryLabel": "qo‘llab-quvvatlash"
       }
     ]
   },
   "testimonials": {
     "badge": "FIKRLAR",
     "title": "Talabalarimiz nima deydi",
-    "description": "LearnHub yordamida o‘z karyerasini o‘zgartirgan minglab muvaffaqiyatli talabalar safiga qo‘shiling.",
+    "description": "Bilimgoh yordamida o‘z karyerasini o‘zgartirgan minglab muvaffaqiyatli talabalar safiga qo‘shiling.",
     "items": [
       {
-        "name": "Alex Thompson",
-        "role": "Meta kompaniyasida dasturchi",
-        "avatar": "/assets/avatars/testimonial-1.jpg",
-        "text": "LearnHub mening karyeramni butunlay o‘zgartirdi. Web dasturlash bootcampi menga Meta kompaniyasida ishlash uchun kerakli ko‘nikmalarni berdi."
+        "name": "Madina Karimova",
+        "role": "Westminster Toshkent talabasi",
+        "text": "Bilimgohning ingliz tili kursi butunlay o‘zgartirdi. IELTS 8.0 olib Westminster Toshkent universitetiga qabul qilindim. Mentorlar haqiqatan ham qiziqib o‘qitishadi."
       },
       {
-        "name": "Jessica Lee",
-        "role": "Spotify kompaniyasida UX dizayner",
-        "avatar": "/assets/avatars/testimonial-2.jpg",
-        "text": "UI/UX kursi aynan menga kerak bo‘lgan narsa edi. Amaliy loyihalar va mentor fikrlari portfolio yaratishda katta yordam berdi."
+        "name": "Sardor Yo‘ldoshev",
+        "role": "EPAM Frontend dasturchi",
+        "text": "Frontend kursi aynan menga kerak bo‘lgan narsa edi. Amaliy loyihalar va mentor fikrlari portfolio yaratishda katta yordam berdi. Hozir EPAM da ishlayman."
       },
       {
-        "name": "David Park",
-        "role": "Amazon kompaniyasida Data Analyst",
-        "avatar": "/assets/avatars/testimonial-3.jpg",
-        "text": "LearnHub tufayli marketingdan data science sohasiga o‘tdim. Strukturali darslar va hamjamiyat juda katta yordam berdi."
+        "name": "Diyora Toshmatova",
+        "role": "NYU Abu Dhabi talabasi",
+        "text": "Bilimgoh tufayli SAT testidan 1480 ball oldim. Strukturali darslar va hamjamiyat juda katta yordam berdi. AQShdagi universitetga grantga kirdim."
       },
       {
-        "name": "Maria Garcia",
-        "role": "Freelance dizayner",
-        "avatar": "/assets/avatars/testimonial-4.jpg",
-        "text": "Freelancer sifatida moslashuvchan o‘qish menga juda muhim edi. LearnHub kurslari mening jadvalimga juda mos tushdi."
+        "name": "Jasur Rahmatov",
+        "role": "TIIT 1-kurs talabasi",
+        "text": "Onam bilan birga DTM tayyorgarlik kursini bosib o‘tdim. Matematika 9.0/10.0 ball oldim va davlat granti bilan TIIT ga kirdim. Mentor Akbar aka rahmat!"
       },
       {
-        "name": "James Wilson",
+        "name": "Feruza Abdullayeva",
+        "role": "Uzum Market UX dizayner",
+        "text": "UX dizayn kursini tamomladim va hozir Uzum kompaniyasida ishlayapman. Sevinch opa juda kuchli mentor — har bir loyihada shaxsiy fikr berdi."
+      },
+      {
+        "name": "Bekzod Tursunov",
         "role": "Startup asoschisi",
-        "avatar": "/assets/avatars/testimonial-5.jpg",
-        "text": "Marketing kursi startupimni rivojlantirishni tushunishga yordam berdi. Bu mening ta’limimdagi eng yaxshi investitsiya bo‘ldi."
-      },
-      {
-        "name": "Emily Chen",
-        "role": "Google kompaniyasida Product Manager",
-        "avatar": "/assets/avatars/testimonial-6.jpg",
-        "text": "Texnik va biznes kurslar kombinatsiyasi menga katta ustunlik berdi. LearnHubni barcha hamkasblarimga tavsiya qilganman."
+        "text": "Marketing kursi startupimni rivojlantirishda juda yordam berdi. Bu mening ta’limimga qilgan eng yaxshi investitsiyam edi. Yangi loyihalarni rejalashtirayapman."
       }
     ]
+  },
+  "blog": {
+    "badge": "BLOG",
+    "title": "So‘nggi maqolalar",
+    "description": "Ta’lim, IELTS, DTM, IT va karyera haqida bizning ustozlarimiz qalamiga mansub maqolalar.",
+    "viewAll": "Barcha maqolalarni ko‘rish",
+    "items": [
+      {
+        "category": "IELTS",
+        "title": "IELTS 7.0+ balli olish uchun 90 kunlik to‘liq reja",
+        "author": "Nilufar Ergasheva",
+        "date": "12 dekabr 2025"
+      },
+      {
+        "category": "IT VA DASTURLASH",
+        "title": "2026-yilda Frontend dasturchi bo‘lish: to‘liq roadmap",
+        "author": "Javohir Aliyev",
+        "date": "10 dekabr 2025"
+      },
+      {
+        "category": "DTM",
+        "title": "DTM 2026 — yangi formatdagi imtihon: nimani bilish kerak",
+        "author": "Sherzod Mamatov",
+        "date": "8 dekabr 2025"
+      }
+    ]
+  },
+  "cta": {
+    "titleStart": "O‘rganishni",
+    "titleAccent": "bugun",
+    "titleEnd": "boshlang",
+    "description": "50 000+ talabaga qo‘shiling va karyerangizni o‘zgartiring. Birinchi haftada to‘liq bepul.",
+    "primary": "Bepul boshlash",
+    "secondary": "Tariflarni ko‘rish"
   },
   "footer": {
     "description": "Dunyo bo‘ylab millionlab o‘quvchilarga professional kurslar va mentorlar orqali bilim beramiz.",

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Users,
   MessageCircle,
@@ -11,18 +10,6 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-
-const avatars = [
-  { id: 1, image: "/assets/avatars/community-avatar-1.jpg" },
-  { id: 2, image: "/assets/avatars/community-avatar-2.jpg" },
-  { id: 3, image: "/assets/avatars/community-avatar-3.jpg" },
-  { id: 4, image: "/assets/avatars/community-avatar-4.jpg" },
-  { id: 5, image: "/assets/avatars/community-avatar-5.jpg" },
-  { id: 6, image: "/assets/avatars/community-avatar-6.jpg" },
-  { id: 7, image: "/assets/avatars/community-avatar-7.jpg" },
-  { id: 8, image: "/assets/avatars/community-avatar-8.jpg" },
-  { id: 9, image: "/assets/avatars/community-avatar-9.jpg" },
-];
 
 export default function Community() {
   const { t } = useTranslation();
@@ -60,41 +47,48 @@ export default function Community() {
     },
   ];
 
+  const floatingAvatars = [
+    {
+      letter: "Z",
+      color: "from-emerald-400 to-teal-500",
+      position: "top-6 left-2 sm:left-6",
+      delay: 0,
+    },
+    {
+      letter: "D",
+      color: "from-violet-500 to-purple-500",
+      position: "top-2 right-6 sm:right-10",
+      delay: 0.4,
+    },
+    {
+      letter: "J",
+      color: "from-red-500 to-rose-500",
+      position: "bottom-8 left-4 sm:left-12",
+      delay: 0.8,
+    },
+  ];
+
   const container = {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.12,
       },
     },
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const avatarAnim = {
-    hidden: { opacity: 0, scale: 0.8 },
-    show: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   return (
-    <motion.section id="community"
+    <motion.section
+      id="community"
       variants={container}
       initial="hidden"
       whileInView="show"
@@ -104,13 +98,13 @@ export default function Community() {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         {/* LEFT */}
         <motion.div variants={fadeUp}>
-          <p className="text-green-500 text-sm font-semibold tracking-widest">
+          <p className="text-green-500 text-sm font-semibold tracking-[0.25em] uppercase">
             {t("community.badge")}
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mt-3 leading-tight">
             {t("community.title")}{" "}
-            <span className="text-green-500">
+            <span className="text-gray-900 dark:text-white">
               {t("community.titleHighlight")}
             </span>
           </h2>
@@ -119,10 +113,10 @@ export default function Community() {
             {t("community.description")}
           </p>
 
-          {/* Features */}
+          {/* Features grid */}
           <motion.div
             variants={container}
-            className="grid md:grid-cols-2 gap-6 mt-10"
+            className="grid sm:grid-cols-2 gap-4 mt-10"
           >
             {features.map((item, index) => {
               const Icon = item.icon;
@@ -131,21 +125,21 @@ export default function Community() {
                 <motion.div
                   key={index}
                   variants={fadeUp}
-                  className="flex gap-4"
+                  whileHover={{ y: -3 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                  className="rounded-2xl bg-emerald-50/70 dark:bg-emerald-500/5 border border-emerald-100 dark:border-emerald-500/10 p-4 hover:border-emerald-300 dark:hover:border-emerald-500/30 transition"
                 >
-                  <div className="bg-green-100 dark:bg-green-900 p-3 rounded-full h-fit">
-                    <Icon className="text-green-500" size={20} />
+                  <div className="bg-white dark:bg-[#0F172A] shadow-sm w-10 h-10 rounded-xl flex items-center justify-center mb-3">
+                    <Icon className="text-emerald-500" size={18} />
                   </div>
 
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">
-                      {item.title}
-                    </h4>
+                  <h4 className="font-bold text-gray-900 dark:text-white text-sm">
+                    {item.title}
+                  </h4>
 
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {item.text}
-                    </p>
-                  </div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+                    {item.text}
+                  </p>
                 </motion.div>
               );
             })}
@@ -153,69 +147,77 @@ export default function Community() {
 
           <motion.button
             variants={fadeUp}
-            className="mt-10 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-medium"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="mt-10 bg-emerald-500 hover:bg-emerald-600 text-white px-7 py-3 rounded-full font-medium shadow-lg shadow-emerald-500/25 transition"
           >
             {t("community.button")}
           </motion.button>
         </motion.div>
 
-        {/* RIGHT */}
+        {/* RIGHT — central stat card with floating avatars */}
         <motion.div
           variants={fadeUp}
-          className="relative bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-lg"
+          className="relative h-[420px] md:h-[460px] flex items-center justify-center"
         >
-          {/* Avatar Grid */}
-          <motion.div
-            variants={container}
-            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-3 justify-items-center"
-          >
-            {avatars.map((avatar) => (
-              <motion.div
-                key={avatar.id}
-                variants={avatarAnim}
-                className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-4 border-green-400"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.45 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full h-full"
-                >
-                  <Image
-                    src={avatar.image}
-                    fill
-                    alt="community member"
-                    className="object-cover"
-                  />
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Soft glow */}
+          <div className="pointer-events-none absolute inset-10 rounded-full bg-gradient-to-br from-emerald-200/50 via-emerald-100/40 to-teal-100/40 blur-3xl dark:from-emerald-500/15 dark:via-emerald-500/10 dark:to-teal-500/10" />
 
-          {/* Floating Badge Top */}
+          {/* Rotating dashed ring */}
           <motion.div
-            variants={fadeUp}
-            className="absolute -top-6 right-6 bg-white dark:bg-gray-800 shadow-md rounded-xl px-4 py-3 text-sm"
+            aria-hidden
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute h-[340px] w-[340px] rounded-full border-2 border-dashed border-emerald-300/60 dark:border-emerald-500/30"
+          />
+
+          {/* Central stat card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative z-10 bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-gray-800 rounded-3xl shadow-2xl shadow-emerald-500/10 px-8 py-7 text-center w-[230px]"
           >
-            <p className="font-semibold text-gray-900 dark:text-white">
+            <div className="text-4xl md:text-5xl font-extrabold text-emerald-500">
+              {t("community.stat.value")}
+            </div>
+            <div className="mt-1 font-semibold text-gray-900 dark:text-white">
+              {t("community.stat.label")}
+            </div>
+            <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              {t("community.stat.subtext")}
+            </div>
+
+            <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               {t("community.badges.supportTitle")}
-            </p>
-            <p className="text-gray-500 text-xs">
-              {t("community.badges.supportText")}
-            </p>
+            </div>
           </motion.div>
 
-          {/* Floating Badge Bottom */}
-          <motion.div
-            variants={fadeUp}
-            className="absolute -bottom-6 left-6 bg-white dark:bg-gray-800 shadow-md rounded-xl px-4 py-3 text-sm"
-          >
-            <p className="font-semibold text-gray-900 dark:text-white">
-              {t("community.badges.countriesTitle")}
-            </p>
-            <p className="text-gray-500 text-xs">
-              {t("community.badges.countriesText")}
-            </p>
-          </motion.div>
+          {/* Floating letter avatars */}
+          {floatingAvatars.map((a) => (
+            <motion.div
+              key={a.letter}
+              initial={{ opacity: 0, scale: 0.6 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 + a.delay }}
+              className={`absolute ${a.position}`}
+            >
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 4 + a.delay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className={`h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br ${a.color} text-white text-lg font-extrabold flex items-center justify-center shadow-xl shadow-black/10 ring-4 ring-white dark:ring-[#0B0F14]`}
+              >
+                {a.letter}
+              </motion.div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </motion.section>

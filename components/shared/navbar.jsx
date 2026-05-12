@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, BookOpenText } from "lucide-react";
+import { Menu, X, ArrowRight, Gift } from "lucide-react";
 import Link from "next/link";
 import ModeToggle from "./mode-toggle";
 import LanguageSwitcher from "./language-dropdown";
@@ -13,7 +13,7 @@ import Logo from "./logo";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeHash, setActiveHash] = useState("#");
 
   const { isSignedIn } = useUser();
   const { t } = useTranslation();
@@ -21,75 +21,101 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const menu = [
-    { name: t("navbar.home"), link: "#" },
-    { name: t("navbar.courses"), link: "#courses" },
-    { name: t("navbar.mentor"), link: "#mentors" },
-    { name: t("navbar.group"), link: "#community" },
-    { name: t("navbar.testimonials"), link: "#testimonial" },
+    { name: t("navbar.home"), link: "#", id: "#" },
+    { name: t("navbar.courses"), link: "#courses", id: "#courses" },
+    { name: t("navbar.mentor"), link: "#mentors", id: "#mentors" },
+    { name: t("navbar.group"), link: "#community", id: "#community" },
+    { name: t("navbar.testimonials"), link: "#testimonial", id: "#testimonial" },
+    { name: t("navbar.blog"), link: "#blog", id: "#blog" },
+    { name: t("navbar.offer"), link: "#offer", id: "#offer", icon: true },
   ];
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onHash = () => setActiveHash(window.location.hash || "#");
+    onHash();
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
   return (
     <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4 }}
-      className={`fixed w-full top-0 z-50 border-b transition-all duration-300
-      ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-md shadow dark:bg-[#0b1117]/80"
-          : "bg-white dark:bg-[#0b1117]"
-      }`}
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl px-2"
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <div className="bg-white/85 dark:bg-[#0b1117]/85 backdrop-blur-xl border border-gray-200/70 dark:border-gray-800/80 rounded-full shadow-lg shadow-black/5 dark:shadow-black/30 px-3 lg:px-4 py-2 flex items-center justify-between gap-2">
         {/* LOGO */}
-       <Logo />
+        <div className="pl-1">
+          <Logo />
+        </div>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden lg:flex gap-8 text-gray-700 dark:text-gray-200 font-medium">
-          {menu.map((item, i) => (
-            <li key={i}>
-              <Link
-                href={`${pathname === "/pricing" ? "/" : item.link}`}
-                className="hover:text-green-500 transition"
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
+        <ul className="hidden lg:flex items-center gap-1 text-sm font-medium">
+          {menu.map((item, i) => {
+            const isActive =
+              pathname === "/" && (activeHash === item.id || (item.id === "#" && (activeHash === "" || activeHash === "#")));
+            return (
+              <li key={i}>
+                <Link
+                  href={pathname === "/pricing" ? "/" : item.link}
+                  className={`relative inline-flex items-center gap-1.5 px-3 py-2 rounded-full transition ${
+                    isActive
+                      ? "text-gray-900 dark:text-white"
+                      : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                  }`}
+                >
+                  {item.icon && <Gift size={14} className="text-amber-500" />}
+                  {item.name}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavUnderline"
+                      className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[3px] w-5 rounded-full bg-green-500"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* DESKTOP RIGHT */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-1.5">
           <LanguageSwitcher />
-          <div className="border rounded-md">
-            <ModeToggle />
-          </div>
+          <ModeToggle />
 
-          <Link href={'/auth'}>
-          <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-md">
-            {t("buttons.getStarted")}
-          </button>
-          </Link>
+          {!isSignedIn ? (
+            <>
+              <Link
+                href="/auth"
+                className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 transition px-3 py-2"
+              >
+                {t("navbar.signIn")}
+              </Link>
+              <Link href="/auth">
+                <button className="bg-green-500 hover:bg-green-600 text-white pl-4 pr-3 py-2 rounded-full text-sm font-medium inline-flex items-center gap-1.5 transition shadow-md shadow-green-500/25">
+                  {t("buttons.getStarted")}
+                  <ArrowRight size={14} />
+                </button>
+              </Link>
+            </>
+          ) : (
+            <div className="pl-1">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          )}
         </div>
 
         {/* MOBILE RIGHT */}
-        <div className="lg:hidden flex items-center gap-2">
-          <LanguageSwitcher />
-          <div className="border rounded-md">
-            <ModeToggle />
-          </div>
-
+        <div className="lg:hidden flex items-center gap-1">
+          <ModeToggle />
           <button
             onClick={() => setOpen(!open)}
-            className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle menu"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
@@ -99,28 +125,39 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="lg:hidden border-t bg-white dark:bg-[#0b1117]"
+          className="lg:hidden mt-2 bg-white/95 dark:bg-[#0b1117]/95 backdrop-blur-xl border border-gray-200/70 dark:border-gray-800/80 rounded-2xl shadow-lg shadow-black/5 dark:shadow-black/30 overflow-hidden"
         >
-          <div className="px-6 py-6 flex flex-col gap-6">
-            {/* MENU LINKS */}
+          <div className="px-5 py-5 flex flex-col gap-4">
             {menu.map((item, i) => (
               <Link
                 key={i}
-                href={item.link}
+                href={pathname === "/pricing" ? "/" : item.link}
                 onClick={() => setOpen(false)}
-                className="text-gray-700 dark:text-gray-200 font-medium hover:text-green-500 transition"
+                className="text-gray-700 dark:text-gray-200 font-medium hover:text-green-500 transition inline-flex items-center gap-2"
               >
+                {item.icon && <Gift size={16} className="text-amber-500" />}
                 {item.name}
               </Link>
             ))}
 
-            {/* AUTH BUTTON */}
+            <div className="flex items-center gap-3 pt-2 border-t border-gray-200 dark:border-gray-800">
+              <LanguageSwitcher />
+            </div>
+
             {!isSignedIn ? (
-              <SignInButton mode="modal">
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full font-medium transition">
-                  {t("buttons.getStarted")}
-                </button>
-              </SignInButton>
+              <div className="flex flex-col gap-2">
+                <Link href="/auth" onClick={() => setOpen(false)}>
+                  <button className="w-full border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 py-3 rounded-full font-medium transition">
+                    {t("navbar.signIn")}
+                  </button>
+                </Link>
+                <Link href="/auth" onClick={() => setOpen(false)}>
+                  <button className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full font-medium transition inline-flex items-center justify-center gap-2">
+                    {t("buttons.getStarted")}
+                    <ArrowRight size={16} />
+                  </button>
+                </Link>
+              </div>
             ) : (
               <div className="flex justify-center">
                 <UserButton afterSignOutUrl="/" />

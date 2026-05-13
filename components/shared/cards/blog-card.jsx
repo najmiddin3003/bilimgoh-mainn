@@ -4,30 +4,31 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Target, Zap, FileText } from "lucide-react";
 
+/** Yuqori rangli panel + badge ikonkasi + pastki avatar rangi */
 const POST_VISUALS = [
   {
-    gradient: "from-emerald-500 to-emerald-700",
+    topBg: "bg-emerald-500",
     Icon: Target,
-    iconColor: "text-emerald-500",
-    avatarColor: "from-rose-500 to-pink-500",
+    BadgeIcon: Target,
+    avatarClass: "bg-rose-400",
   },
   {
-    gradient: "from-violet-500 to-indigo-700",
+    topBg: "bg-indigo-600",
     Icon: Zap,
-    iconColor: "text-violet-500",
-    avatarColor: "from-emerald-400 to-teal-500",
+    BadgeIcon: Zap,
+    avatarClass: "bg-orange-400",
   },
   {
-    gradient: "from-orange-500 to-amber-700",
+    topBg: "bg-amber-500",
     Icon: FileText,
-    iconColor: "text-orange-500",
-    avatarColor: "from-sky-500 to-blue-500",
+    BadgeIcon: FileText,
+    avatarClass: "bg-sky-500",
   },
   {
-    gradient: "from-pink-500 to-rose-700",
+    topBg: "bg-pink-500",
     Icon: FileText,
-    iconColor: "text-pink-500",
-    avatarColor: "from-amber-500 to-orange-500",
+    BadgeIcon: FileText,
+    avatarClass: "bg-amber-500",
   },
 ];
 
@@ -82,57 +83,84 @@ export default function Blog() {
         {/* Cards */}
         <motion.div
           variants={container}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {posts.slice(0, 3).map((post, idx) => {
             const visual = POST_VISUALS[idx % POST_VISUALS.length];
             const Icon = visual.Icon;
+            const BadgeIcon = visual.BadgeIcon;
+            const excerpt =
+              typeof post.excerpt === "string" ? post.excerpt : "";
+            const readTime =
+              typeof post.readTime === "string"
+                ? post.readTime
+                : typeof post.date === "string"
+                  ? post.date
+                  : "";
 
             return (
               <motion.article
                 key={`${post.title}-${idx}`}
                 variants={fadeUp}
-                whileHover={{ y: -6 }}
-                transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br ${visual.gradient} text-white shadow-lg hover:shadow-2xl hover:shadow-black/20 transition flex flex-col h-full min-h-[380px] cursor-pointer`}
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 26 }}
+                className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-gray-200/80 bg-white shadow-lg shadow-gray-200/60 transition hover:shadow-xl dark:border-gray-800 dark:bg-[#11161c] dark:shadow-black/40"
               >
-                {/* Background pattern */}
-                <div className="pointer-events-none absolute -top-8 -right-8 h-44 w-44 rounded-full bg-white/10 blur-2xl" />
-                <div className="pointer-events-none absolute -bottom-10 -left-10 h-44 w-44 rounded-full bg-black/10 blur-2xl" />
-
-                {/* Top: category badge */}
-                <div className="relative p-5 flex items-start justify-between">
-                  <span className="inline-flex items-center bg-white/95 backdrop-blur text-gray-900 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow">
+                {/* Yuqori: kategoriya + katta ikonka */}
+                <div
+                  className={`relative min-h-[11.5rem] shrink-0 px-5 pb-10 pt-5 ${visual.topBg}`}
+                >
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-gray-900 shadow-sm">
+                    <BadgeIcon
+                      size={13}
+                      className="shrink-0 text-gray-800"
+                      strokeWidth={2.25}
+                    />
                     {post.category}
                   </span>
-                </div>
-
-                {/* Center icon */}
-                <div className="relative flex-1 flex items-center justify-center px-5">
-                  <div className="h-16 w-16 rounded-2xl bg-white shadow-xl shadow-black/10 flex items-center justify-center">
-                    <Icon size={28} className={visual.iconColor} strokeWidth={2.5} />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-2 top-14 flex items-center justify-center">
+                    <Icon
+                      size={80}
+                      className="text-white drop-shadow-sm"
+                      strokeWidth={1.35}
+                    />
                   </div>
                 </div>
 
-                {/* Bottom: title + author */}
-                <div className="relative p-5 pt-4">
-                  <h3 className="font-bold text-base md:text-lg leading-snug line-clamp-2 mb-4">
+                {/* Pastki: oq blok — sarlavha, qisqacha, muallif */}
+                <div className="flex flex-1 flex-col bg-white px-5 pb-5 pt-5 dark:bg-[#0f1419]">
+                  <h3 className="text-lg font-bold leading-snug tracking-tight text-gray-900 line-clamp-2 dark:text-white">
                     {post.title}
                   </h3>
+                  {excerpt ? (
+                    <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                      {excerpt}
+                    </p>
+                  ) : (
+                    <div className="flex-1" />
+                  )}
 
-                  <div className="flex items-center gap-2.5 pt-3 border-t border-white/20">
+                  <div className="mt-5 flex items-center gap-3 border-t border-gray-100 pt-4 dark:border-gray-800">
                     <div
-                      className={`h-8 w-8 shrink-0 rounded-full bg-gradient-to-br ${visual.avatarColor} ring-2 ring-white/90 text-white text-[10px] font-bold flex items-center justify-center`}
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${visual.avatarClass}`}
                     >
                       {getInitials(post.author)}
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-semibold truncate">
+                    <div className="min-w-0 flex-1 text-sm">
+                      <span className="font-medium text-gray-900 dark:text-gray-100">
                         {post.author}
-                      </p>
-                      <p className="text-[10px] text-white/70 truncate">
-                        {post.date}
-                      </p>
+                      </span>
+                      {readTime ? (
+                        <>
+                          <span className="text-gray-300 dark:text-gray-600">
+                            {" "}
+                            ·{" "}
+                          </span>
+                          <span className="text-gray-500 dark:text-gray-400">
+                            {readTime}
+                          </span>
+                        </>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -142,12 +170,15 @@ export default function Blog() {
         </motion.div>
 
         {/* View all */}
-        <motion.div variants={fadeUp} className="flex justify-center mt-10">
-          <button className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-emerald-500 dark:hover:text-emerald-400 font-medium transition group">
+        <motion.div variants={fadeUp} className="mt-12 flex justify-center">
+          <button
+            type="button"
+            className="group inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-7 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:border-emerald-500/60 hover:bg-gray-50 dark:border-gray-600 dark:bg-[#151a20] dark:text-gray-100 dark:hover:border-emerald-500/50 dark:hover:bg-[#1a2028]"
+          >
             {t("blog.viewAll")}
             <ArrowRight
-              size={16}
-              className="transition-transform group-hover:translate-x-1"
+              size={18}
+              className="transition-transform group-hover:translate-x-0.5"
             />
           </button>
         </motion.div>

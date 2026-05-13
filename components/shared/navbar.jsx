@@ -58,7 +58,7 @@ export default function Navbar() {
 				initial={{ y: -80, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ duration: 0.5, ease: 'easeOut' }}
-				className='mx-auto w-full max-w-6xl px-3 sm:px-4'
+				className='mx-auto w-full max-w-7xl px-3 sm:px-4'
 			>
 				<div className='py-6 grid grid-cols-[1fr_auto] items-center gap-2 lg:grid-cols-[1fr_auto_1fr]'>
 					{/* LOGO */}
@@ -104,12 +104,12 @@ export default function Navbar() {
 							<>
 								<Link
 									href='/auth'
-									className='text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 transition px-3 py-2'
+									className='text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 transition px-3 py-2 w-20 text-center'
 								>
 									{t('navbar.signIn')}
 								</Link>
 								<Link href='/auth'>
-									<button className='bg-green-500 hover:bg-green-600 text-white pl-4 pr-3 py-2 rounded-full text-sm font-medium inline-flex items-center gap-1.5 transition shadow-md shadow-green-500/25'>
+									<button className='bg-green-500 hover:bg-green-600 text-white pl-4 pr-3 py-2 rounded-full text-sm font-medium inline-flex items-center w-34 text-center justify-center gap-1.5 transition shadow-md shadow-green-500/25'>
 										{t('buttons.getStarted')}
 										<ArrowRight size={14} />
 									</button>

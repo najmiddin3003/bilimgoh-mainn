@@ -369,20 +369,26 @@
       {
         "category": "IELTS",
         "title": "A 90-day plan to score 7.0+ on IELTS",
+        "excerpt": "Daily tasks for Listening, Reading, Writing and Speaking, trusted resources, and a simple self-check schedule for steady progress in 90 days.",
         "author": "Nilufar Ergasheva",
-        "date": "Dec 12, 2025"
+        "date": "Dec 12, 2025",
+        "readTime": "12 min read"
       },
       {
         "category": "IT & DEV",
         "title": "Becoming a Frontend developer in 2026: full roadmap",
+        "excerpt": "From HTML/CSS to React and TypeScript: what to learn in order, how to build a portfolio, and practical tips before you apply for jobs.",
         "author": "Javohir Aliyev",
-        "date": "Dec 10, 2025"
+        "date": "Dec 10, 2025",
+        "readTime": "15 min read"
       },
       {
         "category": "DTM",
         "title": "DTM 2026 — new exam format: what you need to know",
+        "excerpt": "Subject scoring, time limits, and a prep strategy in short form so you can plan revision from now until exam day.",
         "author": "Sherzod Mamatov",
-        "date": "Dec 8, 2025"
+        "date": "Dec 8, 2025",
+        "readTime": "10 min read"
       }
     ]
   },

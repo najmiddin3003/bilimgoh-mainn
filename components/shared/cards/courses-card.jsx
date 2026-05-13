@@ -56,7 +56,7 @@ export function CourseCard({ course }) {
                 <Flame size={11} className="text-orange-500" />
                 TOP
               </span>
-            ) : (
+            ) : ( 
               <span className="inline-flex items-center rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold tracking-widest text-gray-900 uppercase shadow backdrop-blur">
                 {course.category.split(" ")[0]}
               </span>
@@ -243,8 +243,8 @@ export default function Courses({ simpleMode = false, forcedCategory = null }) {
             viewport={{ once: true, amount: 0.3 }}
             className="mt-12 flex justify-center"
           >
-            <button
-              type="button"
+            <Link
+              href="/all-courses"
               className="group inline-flex items-center gap-2 font-medium text-gray-700 transition hover:text-green-500 dark:text-gray-200 dark:hover:text-green-400"
             >
               {t("courses.viewAll")?.replace("→", "").trim() ||
@@ -253,7 +253,7 @@ export default function Courses({ simpleMode = false, forcedCategory = null }) {
                 size={16}
                 className="transition-transform group-hover:translate-x-1"
               />
-            </button>
+            </Link>
           </motion.div>
         )}
 

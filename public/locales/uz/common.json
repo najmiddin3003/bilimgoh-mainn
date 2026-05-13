@@ -363,26 +363,32 @@
   "blog": {
     "badge": "BLOG",
     "title": "So‘nggi maqolalar",
-    "description": "Ta’lim, IELTS, DTM, IT va karyera haqida bizning ustozlarimiz qalamiga mansub maqolalar.",
+    "description": "Ta’lim, IELTS, DTM, IT va karyera haqida bizning ustozlarimizdan eksklyuziv maslahatlar.",
     "viewAll": "Barcha maqolalarni ko‘rish",
     "items": [
       {
         "category": "IELTS",
         "title": "IELTS 7.0+ balli olish uchun 90 kunlik to‘liq reja",
+        "excerpt": "Listening, Reading, Writing va Speaking bo‘yicha kunlik vazifalar, resurslar va o‘z-o‘zini tekshirish jadvali — 90 kunda barqaror o‘sish.",
         "author": "Nilufar Ergasheva",
-        "date": "12 dekabr 2025"
+        "date": "12 dekabr 2025",
+        "readTime": "12 daqiqa o‘qish"
       },
       {
         "category": "IT VA DASTURLASH",
         "title": "2026-yilda Frontend dasturchi bo‘lish: to‘liq roadmap",
+        "excerpt": "HTML/CSS dan React va TypeScriptgacha: nimalarni o‘rganish tartibi, portfolio va ishga topshirish bo‘yicha amaliy yo‘riqnoma.",
         "author": "Javohir Aliyev",
-        "date": "10 dekabr 2025"
+        "date": "10 dekabr 2025",
+        "readTime": "15 daqiqa o‘qish"
       },
       {
         "category": "DTM",
         "title": "DTM 2026 — yangi formatdagi imtihon: nimani bilish kerak",
+        "excerpt": "Fanlar bo‘yicha ball tizimi, vaqt cheklovi va tayyorlov strategiyasi — imtihonga chiqqunicha reja tuzish uchun qisqa xulosa.",
         "author": "Sherzod Mamatov",
-        "date": "8 dekabr 2025"
+        "date": "8 dekabr 2025",
+        "readTime": "10 daqiqa o‘qish"
       }
     ]
   },

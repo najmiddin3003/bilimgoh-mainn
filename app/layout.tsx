@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
+import { AuthProvider } from "@/components/providers/auth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "@/i18n/config";
-import Providers from "@/components/providers/clerk-provider";
 import PremiumCursor from "@/components/shared/cursor-follower";
 
 const montSerrat = Montserrat({
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <body className={`${montSerrat.className} antialiased`}>
-        <Providers>
+        <AuthProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -34,7 +34,7 @@ export default function RootLayout({
             <PremiumCursor />
             {children}
           </ThemeProvider>
-        </Providers>
+        </AuthProvider>
       </body>
     </html>
   );

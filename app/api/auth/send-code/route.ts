@@ -7,7 +7,7 @@ import {
   OTP_RESEND_COOLDOWN_SECONDS,
   OTP_TTL_SECONDS,
 } from "@/lib/auth-constants";
-import { sendEskizSms } from "@/lib/eskiz";
+import { buildEskizOtpMessage, mapEskizErrorForUser, sendEskizSms } from "@/lib/eskiz";
 import { getMongoConnectionUserMessage } from "@/lib/mongo-errors";
 import { normalizeNineDigits, toTwelveDigit } from "@/lib/phone";
 
@@ -57,13 +57,14 @@ export async function POST(req: Request) {
     );
 
     const mobile998 = toTwelveDigit(phone);
-    const message = `BilimGoh tasdiqlash kodi: ${code}`;
+    const message = buildEskizOtpMessage(code);
     const sms = await sendEskizSms(mobile998, message);
 
     if (!sms.ok) {
       await OtpCode.deleteOne({ phone });
+      const raw = "error" in sms ? sms.error : "SMS yuborilmadi";
       return NextResponse.json(
-        { error: "sms" in sms ? sms.error : "SMS yuborilmadi" },
+        { error: mapEskizErrorForUser(raw) },
         { status: 502 },
       );
     }

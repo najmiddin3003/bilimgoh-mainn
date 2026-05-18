@@ -8,12 +8,6 @@ import {
 } from "@/lib/auth-server";
 import { verifyPhoneRegisterToken } from "@/lib/verify-phone-token";
 
-function isStrongEnough(password: string): boolean {
-  const hasLetter = /[A-Za-z\u0400-\u04FFЁёҚқҒғҲҳЎў]/.test(password);
-  const hasNumber = /\d/.test(password);
-  return password.length >= 8 && hasLetter && hasNumber;
-}
-
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as {
@@ -42,28 +36,20 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!isStrongEnough(password)) {
-      return NextResponse.json(
-        { error: "Parol talablarga javob bermaydi" },
-        { status: 400 },
-      );
-    }
-
     await connectDB();
 
-    const exists = await User.findOne({ phone: verified.phone });
-    if (exists) {
+    const user = await User.findOne({ phone: verified.phone });
+    if (!user) {
       return NextResponse.json(
-        { error: "Bu telefon bilan akkaunt allaqachon mavjud" },
-        { status: 409 },
+        { error: "Hisob topilmadi. Avval ro‘yxatdan o‘ting." },
+        { status: 404 },
       );
     }
 
-    const passwordHash = await bcrypt.hash(password, 12);
-    const user = await User.create({
-      phone: verified.phone,
-      passwordHash,
-    });
+    const match = await bcrypt.compare(password, user.passwordHash);
+    if (!match) {
+      return NextResponse.json({ error: "Parol noto‘g‘ri" }, { status: 401 });
+    }
 
     const { token, user: publicUser } = await createSessionResponseUser(
       user._id.toString(),
@@ -75,7 +61,7 @@ export async function POST(req: Request) {
       token,
     );
   } catch (e) {
-    console.error("[register]", e);
+    console.error("[login]", e);
     return NextResponse.json({ error: "Server xatolik" }, { status: 500 });
   }
 }

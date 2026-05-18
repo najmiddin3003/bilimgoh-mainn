@@ -1,21 +1,20 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, ArrowRight, Gift } from 'lucide-react'
+import { Menu, X, Gift } from 'lucide-react'
 import Link from 'next/link'
 import ModeToggle from './mode-toggle'
 import LanguageSwitcher from './language-dropdown'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
-import { SignInButton, UserButton, useUser } from '@clerk/nextjs'
 import { usePathname } from 'next/navigation'
 import Logo from './logo'
+import { NavbarAuthActions } from './navbar-auth-actions'
 
 export default function Navbar() {
 	const [open, setOpen] = useState(false)
 	const [activeHash, setActiveHash] = useState('#')
 
-	const { isSignedIn } = useUser()
 	const { t } = useTranslation()
 
 	const pathname = usePathname()
@@ -100,26 +99,7 @@ export default function Navbar() {
 						<LanguageSwitcher />
 						<ModeToggle />
 
-						{!isSignedIn ? (
-							<>
-								<Link
-									href='/auth'
-									className='text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 transition px-3 py-2 w-20 text-center'
-								>
-									{t('navbar.signIn')}
-								</Link>
-								<Link href='/auth'>
-									<button className='bg-green-500 hover:bg-green-600 text-white pl-4 pr-3 py-2 rounded-full text-sm font-medium inline-flex items-center w-34 text-center justify-center gap-1.5 transition shadow-md shadow-green-500/25'>
-										{t('buttons.getStarted')}
-										<ArrowRight size={14} />
-									</button>
-								</Link>
-							</>
-						) : (
-							<div className='pl-1'>
-								<UserButton afterSignOutUrl='/' />
-							</div>
-						)}
+						<NavbarAuthActions />
 					</div>
 
 					{/* MOBILE RIGHT */}
@@ -168,25 +148,8 @@ export default function Navbar() {
 								<LanguageSwitcher />
 							</div>
 
-							{!isSignedIn ? (
-								<div className='flex flex-col gap-2'>
-									<Link href='/auth' onClick={() => setOpen(false)}>
-										<button className='w-full border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 py-3 rounded-full font-medium transition'>
-											{t('navbar.signIn')}
-										</button>
-									</Link>
-									<Link href='/auth' onClick={() => setOpen(false)}>
-										<button className='w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full font-medium transition inline-flex items-center justify-center gap-2'>
-											{t('buttons.getStarted')}
-											<ArrowRight size={16} />
-										</button>
-									</Link>
-								</div>
-							) : (
-								<div className='flex justify-center'>
-									<UserButton afterSignOutUrl='/' />
-								</div>
-							)}
+							<NavbarAuthActions compact onNavigate={() => setOpen(false)} />
+
 						</div>
 					</motion.div>
 				)}

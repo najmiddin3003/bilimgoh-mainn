@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/mongodb";
 import OtpCode from "@/models/OtpCode";
+import User from "@/models/User";
 import { getMongoConnectionUserMessage } from "@/lib/mongo-errors";
 import { normalizeNineDigits, toTwelveDigit } from "@/lib/phone";
 import { signPhoneVerifyToken } from "@/lib/verify-phone-token";
@@ -41,8 +42,9 @@ export async function POST(req: Request) {
 
     const phone12 = toTwelveDigit(phone);
     const verifyToken = await signPhoneVerifyToken(phone12);
+    const isRegistered = Boolean(await User.findOne({ phone: phone12 }).lean());
 
-    return NextResponse.json({ ok: true, verifyToken });
+    return NextResponse.json({ ok: true, verifyToken, isRegistered });
   } catch (e) {
     console.error("[verify-code]", e);
     const hint = getMongoConnectionUserMessage(e);

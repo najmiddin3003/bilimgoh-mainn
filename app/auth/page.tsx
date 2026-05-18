@@ -16,7 +16,9 @@ import {
   Loader2,
 } from "lucide-react";
 import Logo from "@/components/shared/logo";
+import { useAuth } from "@/components/providers/auth-provider";
 import { OTP_TTL_SECONDS } from "@/lib/auth-constants";
+import type { PublicAuthUser } from "@/lib/auth-user";
 import { cn } from "@/lib/utils";
 
 type Step = "phone" | "code" | "password";
@@ -82,6 +84,8 @@ function ErrorAlert({ message, id }: { message: string; id?: string }) {
 
 export default function AuthPage() {
   const router = useRouter();
+  const { isAuthenticated, isLoading: authLoading, refresh, setUser } =
+    useAuth();
   const [step, setStep] = useState<Step>("phone");
 
   const [phone, setPhone] = useState("");
@@ -95,8 +99,15 @@ export default function AuthPage() {
   const [otpExpiresAt, setOtpExpiresAt] = useState<number | null>(null);
   /** SMS tekshiruvidan keyin parol bosqichi uchun JWT */
   const [verifyToken, setVerifyToken] = useState<string | null>(null);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const codeRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  useEffect(() => {
+    if (!authLoading && isAuthenticated) {
+      router.replace("/dashboard");
+    }
+  }, [authLoading, isAuthenticated, router]);
 
   const goBack = () => {
     setError("");
@@ -109,6 +120,7 @@ export default function AuthPage() {
     if (step === "password") {
       setStep("code");
       setVerifyToken(null);
+      setIsRegistered(false);
     }
   };
 
@@ -173,6 +185,7 @@ export default function AuthPage() {
       const data = (await res.json()) as {
         error?: string;
         verifyToken?: string;
+        isRegistered?: boolean;
       };
 
       if (!res.ok) {
@@ -185,6 +198,7 @@ export default function AuthPage() {
       if (typeof data.verifyToken === "string") {
         setVerifyToken(data.verifyToken);
       }
+      setIsRegistered(Boolean(data.isRegistered));
       setStep("password");
     } catch {
       setError("Tarmoq xatolik.");
@@ -193,7 +207,7 @@ export default function AuthPage() {
     }
   };
 
-  const createAccount = async () => {
+  const submitPassword = async () => {
     if (!verifyToken) {
       setError("Avval telefonni tasdiqlang.");
       return;
@@ -203,26 +217,44 @@ export default function AuthPage() {
       setLoading(true);
       setError("");
 
-      const res = await fetch("/api/auth/register", {
+      const endpoint = isRegistered
+        ? "/api/auth/login"
+        : "/api/auth/register";
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ verifyToken, password }),
       });
 
-      const data = (await res.json()) as { error?: string };
+      const data = (await res.json()) as {
+        error?: string;
+        user?: PublicAuthUser;
+      };
 
       if (!res.ok) {
         setError(
           typeof data.error === "string"
             ? data.error
-            : "Hisob yaratilmadi.",
+            : isRegistered
+              ? "Kirish amalga oshmadi."
+              : "Hisob yaratilmadi.",
         );
         return;
       }
 
-      router.push("/");
+      if (data.user) {
+        setUser(data.user);
+      } else {
+        await refresh();
+      }
+      router.push("/dashboard");
     } catch {
-      setError("Hisob yaratishda xatolik. Keyinroq urinib ko‘ring.");
+      setError(
+        isRegistered
+          ? "Kirishda xatolik. Keyinroq urinib ko‘ring."
+          : "Hisob yaratishda xatolik. Keyinroq urinib ko‘ring.",
+      );
     } finally {
       setLoading(false);
     }
@@ -271,6 +303,14 @@ export default function AuthPage() {
     const nextIndex = Math.min(pasted.length, OTP_LENGTH - 1);
     codeRefs.current[nextIndex]?.focus();
   };
+
+  if (authLoading || isAuthenticated) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-zinc-50">
+        <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[radial-gradient(ellipse_120%_80%_at_50%_-20%,rgba(16,185,129,0.06),transparent)] bg-zinc-50">
@@ -419,7 +459,8 @@ export default function AuthPage() {
                         setConfirmPassword={setConfirmPassword}
                         loading={loading}
                         error={error}
-                        onSubmit={createAccount}
+                        onSubmit={submitPassword}
+                        isRegistered={isRegistered}
                       />
                     )}
                   </motion.div>
@@ -803,6 +844,7 @@ function PasswordStep({
   loading,
   error,
   onSubmit,
+  isRegistered,
 }: {
   password: string;
   setPassword: (value: string) => void;
@@ -811,6 +853,7 @@ function PasswordStep({
   loading: boolean;
   error: string;
   onSubmit: () => void;
+  isRegistered: boolean;
 }) {
   const rules = useMemo(() => validatePassword(password), [password]);
 
@@ -819,7 +862,9 @@ function PasswordStep({
     confirmPassword.length > 0 &&
     password === confirmPassword;
 
-  const canSubmit = rules.minLength && rules.letterAndNumber && passwordsMatch;
+  const canSubmit = isRegistered
+    ? password.length >= 8
+    : rules.minLength && rules.letterAndNumber && passwordsMatch;
 
   const strength = useMemo(() => {
     let score = 0;
@@ -846,11 +891,13 @@ function PasswordStep({
         </motion.div>
 
         <h1 className="text-lg font-medium tracking-tight text-zinc-900 sm:text-xl">
-          Parol yarating
+          {isRegistered ? "Tizimga kirish" : "Parol yarating"}
         </h1>
 
         <p className="mt-2 text-[13px] leading-relaxed text-zinc-500">
-          Keyingi kirishlar uchun parolingizni eslab qoling
+          {isRegistered
+            ? "Hisobingizga kirish uchun parolingizni kiriting"
+            : "Keyingi kirishlar uchun parolingizni eslab qoling"}
         </p>
       </div>
 
@@ -861,9 +908,10 @@ function PasswordStep({
           onChange={setPassword}
           placeholder="Kamida 8 belgi"
           disabled={loading}
-          autoComplete="new-password"
+          autoComplete={isRegistered ? "current-password" : "new-password"}
         />
 
+        {!isRegistered && (
         <PasswordInput
           label="Parolni tasdiqlang"
           value={confirmPassword}
@@ -872,6 +920,7 @@ function PasswordStep({
           disabled={loading}
           autoComplete="new-password"
         />
+        )}
       </div>
 
       <div className="mt-6">
@@ -937,11 +986,11 @@ function PasswordStep({
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-            Yaratilmoqda…
+            {isRegistered ? "Kirilmoqda…" : "Yaratilmoqda…"}
           </>
         ) : (
           <>
-            Hisobni yaratish
+            {isRegistered ? "Kirish" : "Hisobni yaratish"}
             <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
           </>
         )}

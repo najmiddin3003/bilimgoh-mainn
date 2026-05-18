@@ -183,6 +183,13 @@ const allAwards: AwardItem[] = [
   },
 ]
 
+/** Umumiy tabdagi «Tanlangan mukofotlar» (icon bilan) */
+const selectedAwards = allAwards
+  .filter((a): a is AwardItem & { icon: LucideIcon } =>
+    Boolean(a.highlighted && a.icon),
+  )
+  .slice(0, 4)
+
 function AwardCard({ award, compact }: { award: AwardItem; compact?: boolean }) {
   const Icon = award.icon
   return (
@@ -475,23 +482,8 @@ export default function Cabinet() {
             )}
 
             {activeTab === "awards" && (
-              <div className="mt-6 grid grid-cols-4 gap-4 sm:grid-cols-4 sm:gap-5">
-                {selectedAwards.map((award) => {
-                  const Icon = award.icon
-                  return (
-                    <div
-                      key={award.label}
-                      className="flex flex-col items-center gap-2 text-center"
-                    >
-                      <div className="flex size-14 items-center justify-center rounded-full border border-white/10 bg-[#0d1219] sm:size-16">
-                        <Icon className="size-6 text-emerald-400 sm:size-7" />
-                      </div>
-                      <p className="text-[10px] leading-tight text-slate-400 sm:text-xs">
-                        {award.label}
-                      </p>
-                    </div>
-                  )
-                })}
+              <div className="mt-6">
+                <AwardsGrid awards={allAwards} />
               </div>
             )}
 

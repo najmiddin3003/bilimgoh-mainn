@@ -1,9 +1,31 @@
 /**
  * Eskiz.uz SMS — https://notify.eskiz.uz/api
  * .env: ESKIZ_EMAIL, ESKIZ_PASSWORD, ESKIZ_FROM (kabinetdagi ruxsat etilgan nom)
+ *        ESKIZ_SMS_TEMPLATE (ixtiyoriy, {#code#} placeholder bilan)
  */
 
+import { ESKIZ_OTP_SMS_TEMPLATE } from "@/lib/auth-constants";
+
 const NOTIFY_BASE = "https://notify.eskiz.uz/api";
+
+/** Moderatsiyadan o‘tgan shablondan SMS matnini yig‘adi */
+export function buildEskizOtpMessage(code: string): string {
+  return ESKIZ_OTP_SMS_TEMPLATE.replace(/\{#code#\}/g, code);
+}
+
+/** Eskiz xatosini foydalanuvchiga tushunarli qilib qaytaradi */
+export function mapEskizErrorForUser(error: string): string {
+  const lower = error.toLowerCase();
+  if (
+    lower.includes("модерац") ||
+    lower.includes("moderation") ||
+    lower.includes("шаблон") ||
+    lower.includes("template")
+  ) {
+    return "SMS matni hali tasdiqlanmagan. Eskiz kabinetida (my.eskiz.uz → SMS → Mening matnlarim) shablon holatini tekshiring.";
+  }
+  return error;
+}
 
 export type EskizSendResult =
   | { ok: true; skipped?: false }

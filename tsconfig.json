@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "components/shared/mode-toggle.jsx", "components/providers/clerk-provider.tsx"  ],
+, "components/shared/mode-toggle.jsx"  ],
   "exclude": ["node_modules"]
 }

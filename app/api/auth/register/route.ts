@@ -63,6 +63,10 @@ export async function POST(req: Request) {
     const user = await User.create({
       phone: verified.phone,
       passwordHash,
+      firstName: "",
+      lastName: "",
+      profileCompleted: false,
+      likedCourseIds: [],
     });
 
     const { token, user: publicUser } = await createSessionResponseUser(

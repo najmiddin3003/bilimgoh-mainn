@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { Clock, Users, Star, ArrowRight, Flame, Heart } from "lucide-react";
+import { useCourseLike } from "@/hooks/use-course-like";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import courses from "../../../constants";
+import { useState } from 'react'
 
 function getInitials(name = "") {
   return name
@@ -24,7 +25,7 @@ function isTop(course) {
 
 export function CourseCard({ course }) {
   const { t } = useTranslation();
-  const [liked, setLiked] = useState(false);
+  const { liked, toggle, loading } = useCourseLike(course.id);
 
   return (
     <motion.div
@@ -69,9 +70,11 @@ export function CourseCard({ course }) {
             aria-pressed={liked}
             onClick={(e) => {
               e.preventDefault();
-              setLiked((v) => !v);
+              e.stopPropagation();
+              void toggle();
             }}
-            className="pointer-events-auto absolute top-3 right-3 z-20 flex size-9 items-center justify-center rounded-full bg-black/30 text-white shadow-md backdrop-blur-sm transition hover:bg-black/45 dark:bg-white/15 dark:hover:bg-white/25"
+            disabled={loading}
+            className="pointer-events-auto absolute top-3 right-3 z-20 flex size-9 items-center justify-center rounded-full bg-black/30 text-white shadow-md backdrop-blur-sm transition hover:bg-black/45 disabled:opacity-60 dark:bg-white/15 dark:hover:bg-white/25"
           >
             <Heart
               size={18}

@@ -6,6 +6,8 @@ import { AuthProvider } from "@/components/providers/auth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "@/i18n/config";
 import PremiumCursor from "@/components/shared/cursor-follower";
+import CompleteProfileModal from "@/components/shared/complete-profile-modal";
+import NewUserPromoModal from "@/components/shared/new-user-promo-modal";
 
 const montSerrat = Montserrat({
   subsets: ["latin"],
@@ -32,6 +34,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <PremiumCursor />
+            <CompleteProfileModal />
+            <NewUserPromoModal />
             {children}
           </ThemeProvider>
         </AuthProvider>

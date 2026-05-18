@@ -1,6 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Loader2, LogOut } from "lucide-react";
+import { useAuth } from "@/components/providers/auth-provider";
+import type { PublicAuthUser } from "@/lib/auth-user";
 import {
   Award,
   BarChart3,
@@ -15,7 +19,6 @@ import {
   Download,
   FileCheck,
   Flame,
-  Heart,
   Home,
   Info,
   Link2,
@@ -31,6 +34,7 @@ import {
 import { FaTelegram } from "react-icons/fa";
 
 import { cn } from "@/lib/utils";
+import LikedCoursesDropdown from "@/components/shared/liked-courses-dropdown";
 import ModeToggle from "./mode-toggle";
 
 const navItems = [
@@ -259,7 +263,15 @@ function DashboardSidebar() {
   );
 }
 
-function DashboardHeader() {
+function DashboardHeader({ user }: { user: PublicAuthUser | null }) {
+  const router = useRouter();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
+
   return (
     <header className="sticky top-0 z-30 flex flex-wrap items-center gap-4 border-b border-white/5 bg-[#0a0e16]/90 px-4 py-4 backdrop-blur-md sm:px-6">
       <div className="flex min-w-0 flex-1 items-center gap-3 rounded-2xl border border-white/8 bg-[#131a26] px-4 py-2.5">
@@ -283,12 +295,16 @@ function DashboardHeader() {
           <Bell className="size-[18px]" />
           <span className="absolute right-2 top-2 size-2 rounded-full bg-rose-500" />
         </button>
+        <LikedCoursesDropdown />
+
         <button
           type="button"
-          className="flex size-10 items-center justify-center rounded-xl border border-white/8 bg-[#131a26] text-slate-300 transition-colors hover:text-white"
-          aria-label="Sevimlilar"
+          onClick={() => void handleLogout()}
+          className="flex size-10 items-center justify-center rounded-xl border border-white/8 bg-[#131a26] text-slate-300 transition-colors hover:border-rose-500/30 hover:bg-rose-500/10 hover:text-rose-400"
+          aria-label="Chiqish"
+          title="Chiqish"
         >
-          <Heart className="size-[18px]" />
+          <LogOut className="size-[18px]" />
         </button>
 
         <button
@@ -296,7 +312,7 @@ function DashboardHeader() {
           className="flex items-center gap-2.5 rounded-2xl border border-white/8 bg-[#131a26] py-1.5 pl-1.5 pr-3"
         >
           <span className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-sm font-bold text-white">
-            MK
+            {user?.initials ?? "BG"}
           </span>
           {/* <span className="hidden text-sm font-medium text-white sm:inline">
             Madina K.
@@ -349,12 +365,27 @@ function CourseRow({
 }
 
 export default function Profile() {
+  const { user, isLoading } = useAuth();
+
+  const greetingName =
+    user?.firstName?.trim() ||
+    user?.displayName?.split(" ")[0] ||
+    "O‘quvchi";
+
+  if (isLoading) {
+    return (
+      <div className="dark flex min-h-screen items-center justify-center bg-[#0a0e16]">
+        <Loader2 className="size-8 animate-spin text-emerald-500" />
+      </div>
+    );
+  }
+
   return (
     <div className="dark min-h-screen bg-[#0a0e16] text-white">
       <DashboardSidebar />
 
       <div className="lg:pl-[220px]">
-        <DashboardHeader />
+        <DashboardHeader user={user} />
 
         <main className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8">
           {/* Salom */}
@@ -363,7 +394,7 @@ export default function Profile() {
               <h1 className="text-2xl font-bold sm:text-3xl">
                 Salom,{" "}
                 <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-                  Madina!
+                  {greetingName}!
                 </span>{" "}
                 👋
               </h1>

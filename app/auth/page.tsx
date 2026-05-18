@@ -19,6 +19,7 @@ import Logo from "@/components/shared/logo";
 import { useAuth } from "@/components/providers/auth-provider";
 import { OTP_TTL_SECONDS } from "@/lib/auth-constants";
 import type { PublicAuthUser } from "@/lib/auth-user";
+import { activateNewUserPromo } from "@/lib/new-user-promo";
 import { cn } from "@/lib/utils";
 
 type Step = "phone" | "code" | "password";
@@ -100,12 +101,14 @@ export default function AuthPage() {
   /** SMS tekshiruvidan keyin parol bosqichi uchun JWT */
   const [verifyToken, setVerifyToken] = useState<string | null>(null);
   const [isRegistered, setIsRegistered] = useState(false);
+  /** Ro‘yxatdan o‘tgan user — SMS o‘tkazib parol bilan kirish */
+  const [skipOtpLogin, setSkipOtpLogin] = useState(false);
 
   const codeRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   useEffect(() => {
     if (!authLoading && isAuthenticated) {
-      router.replace("/dashboard");
+      router.replace("/");
     }
   }, [authLoading, isAuthenticated, router]);
 
@@ -118,9 +121,60 @@ export default function AuthPage() {
       setCode(Array(OTP_LENGTH).fill(""));
     }
     if (step === "password") {
-      setStep("code");
-      setVerifyToken(null);
-      setIsRegistered(false);
+      if (skipOtpLogin) {
+        setStep("phone");
+        setSkipOtpLogin(false);
+        setIsRegistered(false);
+        setPassword("");
+        setConfirmPassword("");
+      } else {
+        setStep("code");
+        setVerifyToken(null);
+        setIsRegistered(false);
+      }
+    }
+  };
+
+  const handlePhoneContinue = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const res = await fetch("/api/auth/check-phone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone }),
+      });
+
+      const data = (await res.json()) as {
+        error?: string;
+        isRegistered?: boolean;
+      };
+
+      if (!res.ok) {
+        setError(
+          typeof data.error === "string"
+            ? data.error
+            : "Telefon tekshirilmadi.",
+        );
+        return;
+      }
+
+      if (data.isRegistered) {
+        setIsRegistered(true);
+        setSkipOtpLogin(true);
+        setVerifyToken(null);
+        setPassword("");
+        setConfirmPassword("");
+        setStep("password");
+        return;
+      }
+
+      await sendCode();
+    } catch {
+      setError("Tarmoq xatolik. Internetni tekshiring.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -199,6 +253,7 @@ export default function AuthPage() {
         setVerifyToken(data.verifyToken);
       }
       setIsRegistered(Boolean(data.isRegistered));
+      setSkipOtpLogin(false);
       setStep("password");
     } catch {
       setError("Tarmoq xatolik.");
@@ -208,7 +263,12 @@ export default function AuthPage() {
   };
 
   const submitPassword = async () => {
-    if (!verifyToken) {
+    if (!isRegistered && !verifyToken) {
+      setError("Avval telefonni tasdiqlang.");
+      return;
+    }
+
+    if (isRegistered && !skipOtpLogin && !verifyToken) {
       setError("Avval telefonni tasdiqlang.");
       return;
     }
@@ -220,11 +280,19 @@ export default function AuthPage() {
       const endpoint = isRegistered
         ? "/api/auth/login"
         : "/api/auth/register";
+
+      const loginBody =
+        skipOtpLogin && isRegistered
+          ? { phone, password }
+          : { verifyToken, password };
+
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ verifyToken, password }),
+        body: JSON.stringify(
+          isRegistered ? loginBody : { verifyToken, password },
+        ),
       });
 
       const data = (await res.json()) as {
@@ -248,7 +316,12 @@ export default function AuthPage() {
       } else {
         await refresh();
       }
-      router.push("/dashboard");
+
+      if (!isRegistered) {
+        activateNewUserPromo();
+      }
+
+      router.push("/");
     } catch {
       setError(
         isRegistered
@@ -413,7 +486,7 @@ export default function AuthPage() {
                   <Logo white={false} />
                 </header>
 
-                <StepProgress step={step} />
+                <StepProgress step={step} skipCodeStep={skipOtpLogin} />
               </div>
 
               <div className="px-6 pb-8 pt-7 sm:px-8 sm:pt-8">
@@ -431,7 +504,7 @@ export default function AuthPage() {
                         setPhone={setPhone}
                         loading={loading}
                         error={error}
-                        onNext={sendCode}
+                        onNext={handlePhoneContinue}
                       />
                     )}
 
@@ -482,10 +555,22 @@ export default function AuthPage() {
   );
 }
 
-function StepProgress({ step }: { step: Step }) {
+function StepProgress({
+  step,
+  skipCodeStep = false,
+}: {
+  step: Step;
+  skipCodeStep?: boolean;
+}) {
   const steps: Step[] = ["phone", "code", "password"];
   const labels = ["Telefon", "Kod", "Parol"];
   const activeIndex = steps.indexOf(step);
+
+  const isStepCompleted = (index: number) => {
+    if (index < activeIndex) return true;
+    if (skipCodeStep && step === "password" && index === 1) return true;
+    return false;
+  };
 
   return (
     <nav className="mt-7" aria-label="Ro‘yxatdan o‘tish bosqichlari">
@@ -504,7 +589,7 @@ function StepProgress({ step }: { step: Step }) {
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 className={cn(
                   "relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-[12px] font-medium tabular-nums shadow-sm transition-colors duration-300",
-                  index < activeIndex &&
+                  isStepCompleted(index) &&
                     "border-emerald-600/90 bg-emerald-600 text-white shadow-emerald-900/10",
                   index === activeIndex &&
                     "border-emerald-500 bg-white text-emerald-800 shadow-[0_2px_8px_-2px_rgba(16,185,129,0.25)]",
@@ -512,7 +597,7 @@ function StepProgress({ step }: { step: Step }) {
                     "border-zinc-200/90 bg-white text-zinc-400 shadow-none",
                 )}
               >
-                {index < activeIndex ? (
+                {isStepCompleted(index) ? (
                   <Check
                     className="h-3.5 w-3.5"
                     strokeWidth={2.5}
@@ -527,7 +612,7 @@ function StepProgress({ step }: { step: Step }) {
                   "max-w-[4.5rem] text-center text-[11px] font-medium leading-tight tracking-tight sm:max-w-none",
                   index === activeIndex
                     ? "text-emerald-800"
-                    : index < activeIndex
+                    : isStepCompleted(index)
                       ? "text-emerald-700/85"
                       : "text-zinc-400",
                 )}
@@ -546,7 +631,7 @@ function StepProgress({ step }: { step: Step }) {
                     className="absolute inset-y-0 left-0 rounded-full bg-emerald-500/90"
                     initial={false}
                     animate={{
-                      width: activeIndex > index ? "100%" : "0%",
+                      width: isStepCompleted(index) ? "100%" : "0%",
                     }}
                     transition={{
                       duration: 0.45,
@@ -651,11 +736,11 @@ function PhoneStep({
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-            Yuborilmoqda…
+            Tekshirilmoqda…
           </>
         ) : (
           <>
-            Kod yuborish
+            Davom etish
             <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
           </>
         )}
@@ -863,7 +948,7 @@ function PasswordStep({
     password === confirmPassword;
 
   const canSubmit = isRegistered
-    ? password.length >= 8
+    ? password.length > 0
     : rules.minLength && rules.letterAndNumber && passwordsMatch;
 
   const strength = useMemo(() => {
@@ -906,7 +991,7 @@ function PasswordStep({
           label="Parol"
           value={password}
           onChange={setPassword}
-          placeholder="Kamida 8 belgi"
+          placeholder={isRegistered ? "Parolingiz" : "Kamida 8 belgi"}
           disabled={loading}
           autoComplete={isRegistered ? "current-password" : "new-password"}
         />
@@ -923,6 +1008,8 @@ function PasswordStep({
         )}
       </div>
 
+      {!isRegistered && (
+        <>
       <div className="mt-6">
         <div className="mb-2 flex items-center justify-between text-xs">
           <span className="font-medium text-zinc-600">Parol kuchi</span>
@@ -969,6 +1056,9 @@ function PasswordStep({
           <RuleRow met={passwordsMatch} label="Parollar mos keladi" />
         </div>
       </div>
+
+        </>
+      )}
 
       <ErrorAlert message={error} />
 

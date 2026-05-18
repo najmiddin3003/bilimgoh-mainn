@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     if (token) {
       const session = await verifySessionToken(token);
       if (session) {
-        return NextResponse.redirect(new URL("/dashboard", request.url));
+        return NextResponse.redirect(new URL("/", request.url));
       }
     }
   }

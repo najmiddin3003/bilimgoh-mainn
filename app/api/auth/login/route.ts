@@ -7,38 +7,52 @@ import {
   createSessionResponseUser,
 } from "@/lib/auth-server";
 import { verifyPhoneRegisterToken } from "@/lib/verify-phone-token";
+import { normalizeNineDigits, toTwelveDigit } from "@/lib/phone";
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as {
       verifyToken?: string;
+      phone?: string;
       password?: string;
     };
 
-    const verifyToken = body.verifyToken;
     const password = typeof body.password === "string" ? body.password : "";
-
-    if (!verifyToken || !password) {
+    if (!password) {
       return NextResponse.json(
-        { error: "Ma’lumotlar yetarli emas" },
+        { error: "Parol kiritilmagan" },
         { status: 400 },
-      );
-    }
-
-    const verified = await verifyPhoneRegisterToken(verifyToken);
-    if (!verified) {
-      return NextResponse.json(
-        {
-          error:
-            "Tasdiqlash muddati tugagan. Telefon va kodni qaytadan kiriting.",
-        },
-        { status: 401 },
       );
     }
 
     await connectDB();
 
-    const user = await User.findOne({ phone: verified.phone });
+    let phone12: string | null = null;
+
+    if (typeof body.verifyToken === "string" && body.verifyToken) {
+      const verified = await verifyPhoneRegisterToken(body.verifyToken);
+      if (!verified) {
+        return NextResponse.json(
+          {
+            error:
+              "Tasdiqlash muddati tugagan. Telefon va kodni qaytadan kiriting.",
+          },
+          { status: 401 },
+        );
+      }
+      phone12 = verified.phone;
+    } else {
+      const phone9 = normalizeNineDigits(String(body.phone ?? ""));
+      if (!phone9) {
+        return NextResponse.json(
+          { error: "Telefon raqami noto‘g‘ri"},
+          { status: 400 },
+        );
+      }
+      phone12 = toTwelveDigit(phone9);
+    }
+
+    const user = await User.findOne({ phone: phone12 }).select("+passwordHash");
     if (!user) {
       return NextResponse.json(
         { error: "Hisob topilmadi. Avval ro‘yxatdan o‘ting." },

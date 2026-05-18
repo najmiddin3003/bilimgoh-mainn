@@ -196,6 +196,7 @@ export default async function Page(props) {
             </div>
 
             <CourseEnrollCard
+              courseId={course.id}
               image={course.image}
               title={course.title}
               currentPriceLabel={course.price}

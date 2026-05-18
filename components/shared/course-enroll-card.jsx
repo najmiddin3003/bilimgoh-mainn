@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Play, Heart, ArrowRight, Clock, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useCourseLike } from "@/hooks/use-course-like";
 import { cn } from "@/lib/utils";
 
 function formatWithSpaces(num) {
@@ -22,6 +23,7 @@ function introDescription(title) {
 }
 
 export default function CourseEnrollCard({
+  courseId,
   image,
   title,
   currentPriceLabel,
@@ -32,7 +34,8 @@ export default function CourseEnrollCard({
 }) {
   const [introOpen, setIntroOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const { liked: saved, toggle: toggleSaved, loading: saveLoading } =
+    useCourseLike(courseId);
   const endAt = useMemo(
     () => Date.now() + 5 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000,
     []
@@ -162,7 +165,8 @@ export default function CourseEnrollCard({
       <Button
         type="button"
         variant="outline"
-        onClick={() => setSaved((s) => !s)}
+        onClick={() => void toggleSaved()}
+        disabled={saveLoading}
         aria-pressed={saved}
         className="mt-3 h-11 w-full rounded-xl border-gray-200 bg-white font-medium dark:border-gray-700 dark:bg-transparent"
       >

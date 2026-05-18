@@ -4,8 +4,8 @@ import Hero from "../components/shared/hero";
 
 const Page = () => {
   return (
-    <div>
-      <Hero />
+    <div className="home-page">
+      {/* <Hero /> */}
     </div>
   );
 };

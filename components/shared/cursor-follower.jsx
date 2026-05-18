@@ -29,9 +29,10 @@ export default function PremiumCursor() {
 	if (disabled) return null
 
 	return (
-		<div
-			ref={glow}
-			className='pointer-events-none fixed z-40 h-[400px] w-[400px] rounded-full bg-[#10B981]/20 blur-[160px] transition-transform duration-100'
-		/>
+		// <div
+		// 	ref={glow}
+		// 	className='pointer-events-none fixed z-40 h-[400px] w-[400px] rounded-full bg-[#10B981]/20 blur-[160px] transition-transform duration-100'
+		// />
+		<div></div>
 	)
 }
